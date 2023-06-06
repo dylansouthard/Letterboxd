@@ -37,7 +37,7 @@ Letterboxd.configure(apiKey: "yourApiKey", apiSecret: "yourApiSecret", keychainS
 ```
 
 ### Authorization
-This package manages the authentication process for you. If a request is made with an expired token, the The API token, it will automatically attempt another using the refresh token. The initial token can be generated as follows:
+This package manages the authentication process for you. If a request is made with an expired token, it will automatically attempt to refresh it using the refresh token. The initial token can be generated as follows:
 ```swift
 Letterboxd.fetchAuthToken(username: "username", password: "password")
 ```
