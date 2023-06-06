@@ -7,10 +7,10 @@
 
 import Foundation
 
-protocol LBActivity: Codable {
+public protocol LBActivity: Codable {
     var member: Letterboxd.MemberSummary { get }
-    var whenCreated: String { get }
-    var type: Letterboxd.ActivityType { get }
+   var whenCreated: String { get }
+   var type: Letterboxd.ActivityType { get }
 }
 
 extension Letterboxd {
@@ -35,9 +35,9 @@ extension Letterboxd {
     }
 
     public struct ActivityResponse: Decodable {
-        let items: [LBActivity]
-        let next: String?
-        var cursor: String? { return next }
+        public let items: [LBActivity]
+        public let next: String?
+        public var cursor: String? { return next }
 
         enum ActivityResponseKey: String, CodingKey {
             case items
@@ -127,117 +127,117 @@ extension Letterboxd {
     }
     
     public struct DiaryEntryActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let diaryEntry: LogEntry
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let diaryEntry: LogEntry
+        public let type: Letterboxd.ActivityType
     }
 
     public struct FilmLikeActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let film: FilmSummary
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let film: FilmSummary
+        public let type: Letterboxd.ActivityType
     }
 
     public struct FilmRatingActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let film: FilmSummary
-        let rating: Double
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let film: FilmSummary
+        public let rating: Double
+        public let type: Letterboxd.ActivityType
     }
 
     public struct FilmWatchActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let film: FilmSummary
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let film: FilmSummary
+        public let type: Letterboxd.ActivityType
     }
 
     public struct FollowActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let followed: MemberSummary
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let followed: MemberSummary
+        public let type: Letterboxd.ActivityType
     }
 
     public struct InvitationAcceptedActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let invitor: MemberSummary
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let invitor: MemberSummary
+        public let type: Letterboxd.ActivityType
     }
 
     public struct ListActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let list: ListSummary
-        let clonedFrom: ListSummary?
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let list: ListSummary
+        public let clonedFrom: ListSummary?
+        public let type: Letterboxd.ActivityType
     }
 
     public struct ListCommentActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let list: ListSummary
-        let comment: ListComment
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let list: ListSummary
+        public let comment: ListComment
+        public let type: Letterboxd.ActivityType
     }
     
     public struct ListLikeActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let list: ListSummary
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let list: ListSummary
+        public let type: Letterboxd.ActivityType
     }
 
     public struct RegistrationActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let type: Letterboxd.ActivityType
     }
 
     public struct ReviewActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let review: LogEntry
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let review: LogEntry
+        public let type: Letterboxd.ActivityType
     }
 
     public struct ReviewCommentActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let review: LogEntry
-        let comment: ReviewComment
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let review: LogEntry
+        public let comment: ReviewComment
+        public let type: Letterboxd.ActivityType
     }
 
     public struct ReviewLikeActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let review: LogEntry
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let review: LogEntry
+        public let type: Letterboxd.ActivityType
     }
 
     public struct StoryActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let story: StorySummary
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let story: StorySummary
+        public let type: Letterboxd.ActivityType
     }
 
     public struct WatchlistActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let film: FilmSummary
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let film: FilmSummary
+        public let type: Letterboxd.ActivityType
     }
     
     public struct UnknownActivity: Codable, LBActivity {
-        let whenCreated: String
-        let member: MemberSummary
-        let type: Letterboxd.ActivityType
+        public let whenCreated: String
+        public let member: MemberSummary
+        public let type: Letterboxd.ActivityType
     }
 }
 

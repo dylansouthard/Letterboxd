@@ -10,92 +10,92 @@ import Foundation
 extension Letterboxd {
     
     public struct Member:Codable {
-        let id, username:String
-            let givenName, familyName: String?
-            let displayName, shortName: String
-            let pronoun: Pronoun
-            let avatar: Image
-            let memberStatus: MemberStatus
-            let hideAdsInContent: Bool
-            let commentPolicy: CommentPolicy?
-            let accountStatus: AccountStatus
-            let hideAds: Bool
-            let twitterUsername: String?
-            let bioLbml, location, website: String?
-            let backdrop: Image?
-            let backdropFocalPoint: Double?
-            let favoriteFilms: [FilmSummary]
-            let pinnedFilmLists: [ListSummary]?
-            let pinnedReviews: [LogEntry]?
-            let links: [Link]
-            let privateWatchlist: Bool
-            let featuredList: ListSummary?
-            let teamMembers: [MemberSummary]?
-            let orgType: OrgType?
-            let bio: String?
+        public let id, username:String
+        public let givenName, familyName: String?
+        public let displayName, shortName: String
+        public let pronoun: Pronoun
+        public let avatar: Image
+        public let memberStatus: MemberStatus
+        public let hideAdsInContent: Bool
+        public let commentPolicy: CommentPolicy?
+        public let accountStatus: AccountStatus
+        public let hideAds: Bool
+        public let twitterUsername: String?
+        public let bioLbml, location, website: String?
+        public let backdrop: Image?
+        public let backdropFocalPoint: Double?
+        public let favoriteFilms: [FilmSummary]
+        public let pinnedFilmLists: [ListSummary]?
+        public let pinnedReviews: [LogEntry]?
+        public let links: [Link]
+        public let privateWatchlist: Bool
+        public let featuredList: ListSummary?
+        public let teamMembers: [MemberSummary]?
+        public let orgType: OrgType?
+        public let bio: String?
     }
     
     public struct MemberSummary: Codable {
-        let id: String
-        let username: String
-        let givenName: String?
-        let familyName: String?
-        let displayName: String
-        let shortName: String
-        let pronoun: Pronoun
-        let avatar: Image
-        let memberStatus: MemberStatus
-        let hideAdsInContent: Bool
-        let commentPolicy: CommentPolicy?
-        let accountStatus: AccountStatus
-        let hideAds: Bool
+        public let id: String
+        public let username: String
+        public let givenName: String?
+        public let familyName: String?
+        public let displayName: String
+        public let shortName: String
+        public let pronoun: Pronoun
+        public let avatar: Image
+        public let memberStatus: MemberStatus
+        public let hideAdsInContent: Bool
+        public let commentPolicy: CommentPolicy?
+        public let accountStatus: AccountStatus
+        public let hideAds: Bool
     }
     
     public struct MembersResponse:Codable {
-        let next:String?
-        let items:[MemberSummary]
+        public let next:String?
+        public let items:[MemberSummary]
     }
     
     //MARK: - === RELATIONSHIP ===
     
     public struct MemberRelationship:Codable {
-        let following:Bool
-        let followedBy:Bool
-        let blocking:Bool
-        let blockedBy:Bool
+        public let following:Bool
+        public let followedBy:Bool
+        public let blocking:Bool
+        public let blockedBy:Bool
     }
     
     //MARK: - === STATISTICS ===
     public struct MemberStatistics:Codable {
-        let member:MemberIdentifier
-        let counts:MemberStatisticsCounts
-        let ratingsHistogram:[RatingsHistogramBar]
-        let yearsInReview:[Int]?
+        public let member:MemberIdentifier
+        public let counts:MemberStatisticsCounts
+        public let ratingsHistogram:[RatingsHistogramBar]
+        public let yearsInReview:[Int]?
         
     }
     
     public struct MemberStatisticsCounts: Codable {
-        let filmLikes: Int
-        let listLikes: Int
-        let reviewLikes: Int
-        let watches: Int
-        let ratings: Int
-        let reviews: Int
-        let diaryEntries: Int
-        let diaryEntriesThisYear: Int
-        let filmsInDiaryThisYear: Int
-        let filmsInDiaryLastYear: Int
-        let watchlist: Int
-        let lists: Int
-        let unpublishedLists: Int
-        let followers: Int
-        let following: Int
-        let listTags: Int
-        let filmTags: Int
+        public let filmLikes: Int
+        public let listLikes: Int
+        public let reviewLikes: Int
+        public let watches: Int
+        public let ratings: Int
+        public let reviews: Int
+        public let diaryEntries: Int
+        public let diaryEntriesThisYear: Int
+        public let filmsInDiaryThisYear: Int
+        public let filmsInDiaryLastYear: Int
+        public let watchlist: Int
+        public let lists: Int
+        public let unpublishedLists: Int
+        public let followers: Int
+        public let following: Int
+        public let listTags: Int
+        public let filmTags: Int
     }
     
     public struct MemberIdentifier:Codable {
-        let id:String
+        public let id:String
     }
     
     public enum MemberStatus: String, Codable {
@@ -116,17 +116,17 @@ extension Letterboxd {
     //MARK: - === PRONOUNS ===
     
     public struct PronounsResponse:Codable {
-        let items:[Pronoun]
+        public let items:[Pronoun]
     }
     
     public struct Pronoun: Codable {
-        let id: String
-        let label: String
-        let subjectPronoun: String
-        let objectPronoun: String
-        let possessiveAdjective: String
-        let possessivePronoun: String
-        let reflexive: String
+        public let id: String
+        public let label: String
+        public let subjectPronoun: String
+        public let objectPronoun: String
+        public let possessiveAdjective: String
+        public let possessivePronoun: String
+        public let reflexive: String
     }
     
     public enum OrgType: String, Codable {

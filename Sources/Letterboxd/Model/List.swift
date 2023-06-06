@@ -42,30 +42,30 @@ extension Letterboxd {
         }
         
         // Computed Date variables
-        var whenCreated: Date? {
+        public var whenCreated: Date? {
             return Letterboxd.dateFormatter.date(from: _whenCreated)
         }
         
-        var whenPublished: Date? {
+        public var whenPublished: Date? {
             return _whenPublished != nil ? Letterboxd.dateFormatter.date(from: _whenPublished!) : nil
         }
     }
     
     public struct ListSummary: Codable {
-        let id: String
-        let name: String
-        let version: Int
-        let filmCount: Int
-        let published: Bool
-        let ranked: Bool
-        let descriptionLbml: String?
-        let descriptionTruncated: Bool?
-        let sharePolicy: SharePolicy
-        let owner: MemberSummary
-        let clonedFrom: ListIdentifier?
-        let previewEntries: [ListEntrySummary]
-        let entriesOfNote: [AListEntryOccurrence]?
-        let description: String?
+        public let id: String
+        public let name: String
+        public let version: Int
+        public let filmCount: Int
+        public let published: Bool
+        public let ranked: Bool
+        public let descriptionLbml: String?
+        public let descriptionTruncated: Bool?
+        public let sharePolicy: SharePolicy
+        public let owner: MemberSummary
+        public let clonedFrom: ListIdentifier?
+        public let previewEntries: [ListEntrySummary]
+        public let entriesOfNote: [AListEntryOccurrence]?
+        public let description: String?
     }
     
     public enum SharePolicy: String, Codable {
@@ -75,89 +75,89 @@ extension Letterboxd {
     }
     
     public struct ListIdentifier: Codable {
-        let id: String
+        public let id: String
     }
     
     public struct ListEntrySummary: Codable {
-        let rank: Int?
-        let film: FilmSummary
+        public let rank: Int?
+        public let film: FilmSummary
     }
     
     public struct AListEntryOccurrence: Codable {
-        let rank: Int?
-        let filmId: String
+        public let rank: Int?
+        public let filmId: String
     }
     
     public struct ListResponse:Codable {
-        let next:String?
-        let items:[ListSummary]
+        public let next:String?
+        public let items:[ListSummary]
     }
     
     public struct TopicsResponse:Codable {
-        let next:String?
-        let items:[AListTopic]
+        public let next:String?
+        public let items:[AListTopic]
     }
     
     public struct AListTopic:Codable {
-        let name:String
-        let items:[ListSummary]
+        public let name:String
+        public let items:[ListSummary]
     }
     
     //MARK: - === Statistics ===
     public struct ListStatistics:Codable {
-        let list:ListIdentifier
-        let counts:ListStatisticsCounts
+        public let list:ListIdentifier
+        public let counts:ListStatisticsCounts
     }
     
     public struct ListStatisticsCounts:Codable {
-        let comments:Int
-        let likes:Int
+        public let comments:Int
+        public let likes:Int
     }
     
     //MARK: - =============== ENTRIES ===============
     
     public struct ListEntriesResponse:Codable {
-        let next:String?
-        let items:[ListEntry]
-        let metadata:FilmsMetadata
-        let relationships:[FilmsMemberRelationship]
+        public let next:String?
+        public let items:[ListEntry]
+        public let metadata:FilmsMetadata
+        public let relationships:[FilmsMemberRelationship]
     }
     
     public struct ListEntry:Codable {
-        let rank: Int?
-        let entryId: String
-        let notesLbml: String?
-        let containsSpoilers: Bool?
-        let film: FilmSummary
-        let notes: String?
+        public let rank: Int?
+        public let entryId: String
+        public let notesLbml: String?
+        public let containsSpoilers: Bool?
+        public let film: FilmSummary
+        public let notes: String?
     }
     
     //MARK: - =============== COMMENTS ===============
     public struct ListCommentsResponse: Codable {
-        let next:String?
-        let items:[ListComment]
+        public let next:String?
+        public let items:[ListComment]
     }
     
     public struct ListComment: Codable {
-        let id: String
-        let member: MemberSummary
+        public let id: String
+        public let member: MemberSummary
         private let _whenCreated: String
         private let _whenUpdated: String
-        let commentLbml: String?
-        let removedByAdmin: Bool
-        let removedByContentOwner: Bool
-        let deleted: Bool
-        let blocked: Bool
-        let blockedByOwner: Bool
-        let editableWindowExpiresIn: Int?
-        let list: ListIdentifier
-        let comment: String?
+        public let commentLbml: String?
+        public let removedByAdmin: Bool
+        public let removedByContentOwner: Bool
+        public let deleted: Bool
+        public let blocked: Bool
+        public let blockedByOwner: Bool
+        public let editableWindowExpiresIn: Int?
+        public let list: ListIdentifier
+        public let comment: String?
         
-        var whenCreated: Date? {
+        public var whenCreated: Date? {
             return Letterboxd.dateFormatter.date(from: _whenCreated)
         }
         
-        var whenUpdated: Date? {
+        public var whenUpdated: Date? {
             return Letterboxd.dateFormatter.date(from: _whenUpdated)
         }
         

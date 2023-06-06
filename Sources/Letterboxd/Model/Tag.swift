@@ -12,25 +12,25 @@ extension Letterboxd {
 
     
     public struct Tag: Codable {
-        let code: String
-        let displayTag: String
+        public let code: String
+        public let displayTag: String
     }
     
     public struct MemberTagsResponse:Codable {
-        let items:[MemberTag]
+        public let items:[MemberTag]
     }
     
     public struct MemberTag:Codable {
-        let code:String
-        let displayTag:String
-        let counts:MemberTagCounts
+        public let code:String
+        public let displayTag:String
+        public let counts:MemberTagCounts
     }
     
     public struct MemberTagCounts:Codable {
-        let films:Int
-        let logEntries:Int
-        let diaryEntries:Int
-        let reviews:Int
-        let lists:Int
+        public let films:Int
+        public let logEntries:Int
+        public let diaryEntries:Int
+        public let reviews:Int
+        public let lists:Int
     }
 }

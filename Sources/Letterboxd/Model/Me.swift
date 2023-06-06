@@ -10,50 +10,50 @@ import Foundation
 extension Letterboxd {
     
     public struct MemberAccount:Codable {
-        let emailAddress: String?
-           let emailAddressValidated, privateAccount, includeInPeopleSection: Bool?
-           let emailWhenFollowed, emailAvailability, emailBuyAvailability, emailRentAvailability: Bool?
-           let emailComments, emailFromFollowedOnly, emailNews, emailShelfLife: Bool?
-           let emailBestInShow, emailRushes, emailPartnerMessages: Bool?
-           let devicesRegisteredForPushNotifications: [String]?
-           let pushNotificationsForGeneralAnnouncements, pushNotificationsForPartnerMessages: Bool?
-           let pushNotificationsForComments, pushNotificationsForListLikes, pushNotificationsForReviewLikes: Bool?
-           let pushNotificationsForNewFollowers, pushNotificationsForAvailability: Bool?
-           let pushNotificationsForBuyAvailability, pushNotificationsForRentAvailability: Bool?
-           let pushNotificationsFromFollowedOnly, canComment, suspended, canCloneLists: Bool?
-           let canChangeAppIcon, canFilterActivity: Bool?
-           let membershipDaysRemaining: Int?
-           let membershipWillAutoRenewViaIAP: Bool?
-           let hasActiveSubscription: Bool?
-           let subscriptionType: String?
-           let member: Member
-           let campaigns: [String]?
-           let adultContentPolicy: AdultContentPolicy?
-           let posterMode: PosterMode?
-           let posterModeOptions: [PosterMode]?
-           let commentPolicy: CommentPolicy?
-           let accountStatus: AccountStatus?
-           let hideAds, showCustomPostersAds, canHaveCustomPosters: Bool?
+        public let emailAddress: String?
+        public let emailAddressValidated, privateAccount, includeInPeopleSection: Bool?
+        public let emailWhenFollowed, emailAvailability, emailBuyAvailability, emailRentAvailability: Bool?
+        public let emailComments, emailFromFollowedOnly, emailNews, emailShelfLife: Bool?
+        public let emailBestInShow, emailRushes, emailPartnerMessages: Bool?
+        public let devicesRegisteredForPushNotifications: [String]?
+        public let pushNotificationsForGeneralAnnouncements, pushNotificationsForPartnerMessages: Bool?
+        public let pushNotificationsForComments, pushNotificationsForListLikes, pushNotificationsForReviewLikes: Bool?
+        public let pushNotificationsForNewFollowers, pushNotificationsForAvailability: Bool?
+        public let pushNotificationsForBuyAvailability, pushNotificationsForRentAvailability: Bool?
+        public let pushNotificationsFromFollowedOnly, canComment, suspended, canCloneLists: Bool?
+        public let canChangeAppIcon, canFilterActivity: Bool?
+        public let membershipDaysRemaining: Int?
+        public let membershipWillAutoRenewViaIAP: Bool?
+        public let hasActiveSubscription: Bool?
+        public let subscriptionType: String?
+        public let member: Member
+        public let campaigns: [String]?
+        public let adultContentPolicy: AdultContentPolicy?
+        public let posterMode: PosterMode?
+        public let posterModeOptions: [PosterMode]?
+        public let commentPolicy: CommentPolicy?
+        public let accountStatus: AccountStatus?
+        public let hideAds, showCustomPostersAds, canHaveCustomPosters: Bool?
 
-           enum AdultContentPolicy: String, Codable {
+        public enum AdultContentPolicy: String, Codable {
                case always = "Always"
                case defaultPolicy = "Default"
            }
 
-           enum PosterMode: String, Codable {
+        public enum PosterMode: String, Codable {
                case all = "All"
                case theirs = "Theirs"
                case yours = "Yours"
                case none = "None"
            }
 
-           enum CommentPolicy: String, Codable {
+        public enum CommentPolicy: String, Codable {
                case anyone = "Anyone"
                case friends = "Friends"
                case you = "You"
            }
 
-           enum AccountStatus: String, Codable {
+        public enum AccountStatus: String, Codable {
                case active = "Active"
                case locked = "Locked"
                case memorialized = "Memorialized"

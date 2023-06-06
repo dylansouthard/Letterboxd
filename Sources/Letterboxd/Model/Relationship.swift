@@ -9,61 +9,61 @@ import Foundation
 
 extension Letterboxd {
     public struct MemberFilmRelationship: Codable {
-        let member: MemberSummary
-        let relationship: FilmRelationship
+        public let member: MemberSummary
+        public let relationship: FilmRelationship
     }
 
     public struct FilmRelationshipResults:Codable {
-        let items:[MemberFilmRelationship]
-        let watchCount:Int?
-        let watchListCount:Int?
+        public let items:[MemberFilmRelationship]
+        public let watchCount:Int?
+        public let watchListCount:Int?
     }
     
     public struct FilmRelationship: Codable {
-        let watched: Bool
-        let whenWatched: String?
-        let liked: Bool
-        let whenLiked: String?
-        let favorited: Bool
-        let owned: Bool?
-        let inWatchlist: Bool
-        let whenAddedToWatchlist: String?
-        let whenCompletedInWatchlist: String?
-        let rating: Double?
-        let reviews: [String]
-        let diaryEntries: [String]
+        public  let watched: Bool
+        public let whenWatched: String?
+        public let liked: Bool
+        public let whenLiked: String?
+        public let favorited: Bool
+        public let owned: Bool?
+        public let inWatchlist: Bool
+        public let whenAddedToWatchlist: String?
+        public let whenCompletedInWatchlist: String?
+        public let rating: Double?
+        public let reviews: [String]
+        public let diaryEntries: [String]
     }
     
     public struct FilmContributorMemberRelationship: Codable {
-        let member:MemberSummary
-        let relationships:[FilmContributorRelationship]
+        public let member:MemberSummary
+        public let relationships:[FilmContributorRelationship]
     }
     
     public struct FilmContributorRelationship: Codable {
-        let type:ContributionType
-        let relationship:FilmsRelationship
+        public let type:ContributionType
+        public let relationship:FilmsRelationship
     }
     
     public struct FilmsRelationship: Codable {
-        let counts:FilmsRelationshipCounts
+        public let counts:FilmsRelationshipCounts
     }
     
     public struct FilmsRelationshipCounts: Codable {
-        let watches:Int
-        let likes:Int
+        public let watches:Int
+        public let likes:Int
     }
     
     public struct FilmsMemberRelationship:Codable {
-        let member:MemberSummary
-        let relationship:FilmsRelationship
+        public let member:MemberSummary
+        public let relationship:FilmsRelationship
     }
     
     //MARK: - =============== LIST/Review ===============
     public struct ListRelationship: Codable {
-        let liked: Bool
-        let subscribed: Bool
-        let subscriptionState: SubscriptionState
-        let commentThreadState: CommentThreadState
+        public let liked: Bool
+        public let subscribed: Bool
+        public let subscriptionState: SubscriptionState
+        public let commentThreadState: CommentThreadState
 
     }
     

@@ -9,13 +9,13 @@ import Foundation
 
 extension Letterboxd {
     public struct Image: Codable {
-        let sizes: [ImageSize]
+        public let sizes: [ImageSize]
     }
 
     public struct ImageSize: Codable {
-        let width: Int
-        let height: Int
-        let url: String
+        public let width: Int
+        public let height: Int
+        public let url: String
     }
     
     public enum LinkType: String, Codable {
@@ -33,9 +33,9 @@ extension Letterboxd {
     }
 
     public struct Link: Codable {
-        let type: LinkType
-        let id: String
-        let url: String
+        public let type: LinkType
+        public let id: String
+        public let url: String
     }
     
     public enum CommentPolicy: String, Codable {

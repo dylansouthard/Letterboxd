@@ -10,28 +10,28 @@ import Foundation
 extension Letterboxd {
     
     public struct LogEntriesResponse:Codable {
-        let next:String?
-        let items:[LogEntry]
+        public let next:String?
+        public let items:[LogEntry]
     }
     
     public struct LogEntry: Codable {
-        let id: String
-        let name: String
-        let owner: MemberSummary
-        let film: FilmSummary?
-        let diaryDetails: DiaryDetails?
-        let review: Review?
-        let tags: [Tag]
-        let whenCreated: String
-        let whenUpdated: String
-        let rating: Double?
-        let like: Bool
-        let commentable: Bool
-        let commentPolicy: CommentPolicy?
-        let links: [Link]
-        let backdrop: Image?
-        let backdropFocalPoint: Double?
-
+        public let id: String
+        public let name: String
+        public let owner: MemberSummary
+        public let film: FilmSummary?
+        public let diaryDetails: DiaryDetails?
+        public let review: Review?
+        public let tags: [Tag]
+        public let whenCreated: String
+        public let whenUpdated: String
+        public let rating: Double?
+        public let like: Bool
+        public let commentable: Bool
+        public let commentPolicy: CommentPolicy?
+        public let links: [Link]
+        public let backdrop: Image?
+        public let backdropFocalPoint: Double?
+        
         enum CodingKeys: String, CodingKey {
             case id, name, owner, film, diaryDetails, review, whenCreated, whenUpdated, rating, like, commentable, commentPolicy, links, backdrop, backdropFocalPoint
             case tags = "tags2"
@@ -39,16 +39,16 @@ extension Letterboxd {
     }
     
     public struct DiaryDetails: Codable {
-        let diaryDate: String
-        let rewatch: Bool
+        public let diaryDate: String
+        public let rewatch: Bool
     }
-
+    
     public struct Review: Codable {
-        let lbml: String
-        let containsSpoilers: Bool
-        let moderated: Bool
-        let whenReviewed: String
-        let text: String
+        public let lbml: String
+        public let containsSpoilers: Bool
+        public let moderated: Bool
+        public let whenReviewed: String
+        public let text: String
     }
     
     public struct ReviewCommentsResponse: Codable {
@@ -57,57 +57,57 @@ extension Letterboxd {
     }
     
     public struct ReviewComment: Codable {
-        let id: String
-        let member: MemberSummary
+        public let id: String
+        public let member: MemberSummary
         private let _whenCreated: String
         private let _whenUpdated: String
-        let commentLbml: String?
-        let removedByAdmin: Bool
-        let removedByContentOwner: Bool
-        let deleted: Bool
-        let blocked: Bool
-        let blockedByOwner: Bool
-        let editableWindowExpiresIn: Int?
-        let review: ReviewIdentifier
-        let comment: String?
-
-        var whenCreated: Date? {
+        public let commentLbml: String?
+        public let removedByAdmin: Bool
+        public let removedByContentOwner: Bool
+        public let deleted: Bool
+        public let blocked: Bool
+        public let blockedByOwner: Bool
+        public let editableWindowExpiresIn: Int?
+        public let review: ReviewIdentifier
+        public let comment: String?
+        
+        public var whenCreated: Date? {
             return Letterboxd.dateFormatter.date(from: _whenCreated)
         }
         
-        var whenUpdated: Date? {
+        public var whenUpdated: Date? {
             return Letterboxd.dateFormatter.date(from: _whenUpdated)
         }
-
+        
         enum CodingKeys: String, CodingKey {
             case id, member, commentLbml, removedByAdmin, removedByContentOwner, deleted, blocked, blockedByOwner, editableWindowExpiresIn, review, comment
-        
+            
             case _whenCreated = "whenCreated"
             case _whenUpdated = "whenUpdated"
-           
+            
         }
     }
     
     public struct ReviewIdentifier:Codable {
-        let id:String
+        public let id:String
     }
     
     public struct ReviewStatistics:Codable {
-        let logEntry:ReviewIdentifier
-        let counts:ReviewStatisticsCounts
+        public let logEntry:ReviewIdentifier
+        public let counts:ReviewStatisticsCounts
     }
     
     public  struct ReviewStatisticsCounts:Codable {
-        let comments:Int
-        let likes:Int
+        public let comments:Int
+        public let likes:Int
     }
     
     
     public struct ReviewRelationship:Codable {
-        let liked:Bool
-        let subscribed:Bool
-        let subscriptionState:ReviewSubscriptionState
-        let commentThreadState:CommentThreadState
+        public let liked:Bool
+        public let subscribed:Bool
+        public let subscriptionState:ReviewSubscriptionState
+        public let commentThreadState:CommentThreadState
         
     }
     

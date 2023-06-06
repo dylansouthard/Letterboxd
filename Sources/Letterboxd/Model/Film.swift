@@ -10,110 +10,110 @@ extension Letterboxd {
     
     //MARK: - === FILM ===
     public struct Film:Codable {
-        let id: String
-        let name: String
-        let originalName: String?
-        let sortingName: String
-        let alternativeNames: [String]?
-        let releaseYear: Int?
-        let poster: Image?
-        let adultPoster: Image?
-        let top250Position: Int?
-        let adult: Bool
-        let reviewsHidden: Bool
-        let filmCollectionId: String?
-        let links: [Link]
-        let relationships: [MemberFilmRelationship]?
-        let genres: [Genre]
-        let tagline:String?
-        let description:String
-        let runTime:Int?
-        let backdrop:Image?
-        let backdropFocalPoint:Double?
-        let trailer:FilmTrailer?
-        let countries:[Country]
-        let languages:[Language]
-        let contributions:[FilmContributions]
-        let news:[NewsItem]?
-        let recentStories:[Story]?
+        public let id: String
+        public let name: String
+        public let originalName: String?
+        public let sortingName: String
+        public let alternativeNames: [String]?
+        public let releaseYear: Int?
+        public let poster: Image?
+        public let adultPoster: Image?
+        public let top250Position: Int?
+        public let adult: Bool
+        public let reviewsHidden: Bool
+        public let filmCollectionId: String?
+        public let links: [Link]
+        public let relationships: [MemberFilmRelationship]?
+        public let genres: [Genre]
+        public let tagline:String?
+        public let description:String
+        public let runTime:Int?
+        public let backdrop:Image?
+        public let backdropFocalPoint:Double?
+        public let trailer:FilmTrailer?
+        public let countries:[Country]
+        public let languages:[Language]
+        public let contributions:[FilmContributions]
+        public let news:[NewsItem]?
+        public let recentStories:[Story]?
         
     }
     
     
     //MARK: - === FILM SUMMARY ===
     public struct FilmSummary: Codable {
-        let id: String
-        let name: String
-        let originalName: String?
-        let sortingName: String
-        let alternativeNames: [String]?
-        let releaseYear: Int?
-        let directors: [ContributorSummary]
-        let poster: Image?
-        let adultPoster: Image?
-        let top250Position: Int?
-        let adult: Bool
-        let reviewsHidden: Bool
-        let filmCollectionId: String?
-        let links: [Link]
-        let relationships: [MemberFilmRelationship]?
-        let genres: [Genre]
+        public let id: String
+        public let name: String
+        public let originalName: String?
+        public let sortingName: String
+        public let alternativeNames: [String]?
+        public let releaseYear: Int?
+        public let directors: [ContributorSummary]
+        public let poster: Image?
+        public let adultPoster: Image?
+        public let top250Position: Int?
+        public let adult: Bool
+        public let reviewsHidden: Bool
+        public let filmCollectionId: String?
+        public let links: [Link]
+        public let relationships: [MemberFilmRelationship]?
+        public let genres: [Genre]
     }
     
     public struct FilmIdentifier: Codable {
-        let id:String
+        public let id:String
     }
     
     public struct FilmsMetadata: Codable {
-        let totalFilmCount:Int
-        let filteredFilmCount:Int
+        public let totalFilmCount:Int
+        public let filteredFilmCount:Int
     }
     
     public struct FilmCollection:Codable {
-        let id:String
-        let name:String
-        let films:[FilmSummary]
-        let links:[Link]
+        public let id:String
+        public let name:String
+        public let films:[FilmSummary]
+        public let links:[Link]
     }
     
     public struct FilmContributions:Codable {
-        let type:ContributionType
-        let contributors:[ContributorSummary]
+        public let type:ContributionType
+        public let contributors:[ContributorSummary]
     }
     
     public struct FilmTrailer:Codable {
-        let id:String
-        let url:String
+        public let id:String
+        public let url:String
     }
     
     public struct FilmsResponse:Codable {
-        let next:String?
-        let items:[FilmSummary]
+        public let next:String?
+        public let items:[FilmSummary]
     }
     
     //MARK: - === STATISTICS ===
     
     public struct FilmStatistics:Codable {
-        let film:FilmIdentifier
-        let counts:FilmStatisticsCounts
-        let rating:Double?
-        let ratingsHistogram:[RatingsHistogramBar]
+        public let film:FilmIdentifier
+        public let counts:FilmStatisticsCounts
+        public let rating:Double?
+        public let ratingsHistogram:[RatingsHistogramBar]
         
     }
     
     public struct FilmStatisticsCounts:Codable {
-        let watches:Int
-        let likes:Int
-        let ratings:Int
-        let fans:Int
-        let lists:Int
-        let reviews:Int
+        public let watches:Int
+        public let likes:Int
+        public let ratings:Int
+        public let fans:Int
+        public let lists:Int
+        public let reviews:Int
     }
     
     public struct RatingsHistogramBar:Codable {
-        let rating:Double
-        let normalizedWeight:Double
-        let count:Int
+        public let rating:Double
+        public let normalizedWeight:Double
+        public let count:Int
     }
     
     

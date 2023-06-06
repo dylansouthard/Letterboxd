@@ -10,18 +10,18 @@ import Foundation
 extension Letterboxd {
     
     public struct NewsResponse:Codable {
-        let next:String?
-        let items:[NewsItem]
+        public let next:String?
+        public let items:[NewsItem]
     
     }
     public struct NewsItem: Codable {
-        let title: String
-        let image: Image
-        let url: String
-        let shortDescription: String?
-        let longDescription: String?
-        let episode: Int?
-        let season: Int?
+        public let title: String
+        public let image: Image
+        public let url: String
+        public let shortDescription: String?
+        public let longDescription: String?
+        public let episode: Int?
+        public let season: Int?
     }
     
 

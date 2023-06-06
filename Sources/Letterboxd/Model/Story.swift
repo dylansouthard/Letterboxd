@@ -10,38 +10,38 @@ import Foundation
 extension Letterboxd {
     
     public struct Story:Codable {
-        let id: String
-            let name: String
-            let author: MemberSummary
-            let url: String?
-            let source: String?
-            let videoUrl: String?
-            let bodyHtml: String?
-            let bodyLbml: String?
-            let whenUpdated: String
-            let whenCreated: String
-            let image: Image?
+        public let id: String
+        public let name: String
+        public let author: MemberSummary
+        public let url: String?
+        public let source: String?
+        public let videoUrl: String?
+        public let bodyHtml: String?
+        public let bodyLbml: String?
+        public let whenUpdated: String
+        public let whenCreated: String
+        public let image: Image?
         
     }
   
     public struct StorySummary:Codable {
-        let id: String
-        let name: String
-        let author: MemberSummary
-        let url: String?
-        let source: String?
-        let videoUrl: String?
-        let bodyHtml: String?
-        let bodyLbml: String?
-        let bodyTruncated: Bool?
-        let whenUpdated: String
-        let whenCreated: String
-        let image: Image?
+        public let id: String
+        public let name: String
+        public let author: MemberSummary
+        public let url: String?
+        public let source: String?
+        public let videoUrl: String?
+        public let bodyHtml: String?
+        public let bodyLbml: String?
+        public let bodyTruncated: Bool?
+        public let whenUpdated: String
+        public let whenCreated: String
+        public let image: Image?
     }
     
     public struct StoriesResponse:Codable {
-        let next:String?
-        let items:[StorySummary]
+        public let next:String?
+        public let items:[StorySummary]
     }
 }
 

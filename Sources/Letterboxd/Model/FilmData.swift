@@ -11,24 +11,24 @@ extension Letterboxd {
     
     //MARK: - =============== COUNTRIES ===============
     public struct CountriesResponse:Codable {
-        let items:[Country]
+        public let items:[Country]
     }
     
     public struct Country:Codable {
-        let code:String
-        let name:String
+        public let code:String
+        public let name:String
     }
     
     
     //MARK: - =============== SERVICES ===============
     public struct FilmServicesResponse:Codable {
-        let items:[FilmService]
+        public let items:[FilmService]
     }
     
     public struct FilmService:Codable {
-        let id:String
-        let name:String
-        let icon:String?
+        public let id:String
+        public let name:String
+        public let icon:String?
         
         var asURLQueryItem:URLQueryItem{URLQueryItem(name: "service", value: self.id)}
         
@@ -37,35 +37,35 @@ extension Letterboxd {
     
     //MARK: - =============== GENRES ===============
     public struct GenresResponse: Codable {
-        let items:[Genre]
+        public let items:[Genre]
     }
     
     public struct Genre: Codable {
-        let id: String
-        let name: String
+        public let id: String
+        public let name: String
     }
     
     
     public enum GenreType:String, LBParamType {
         case action = "8G"
-            case adventure = "9k"
-            case animation = "8m"
-            case comedy = "7I"
-            case crime = "9Y"
-            case documentary = "ai"
-            case drama = "7S"
-            case family = "8w"
-            case fantasy = "82"
-            case history = "90"
-            case horror = "aC"
-            case music = "b6"
-            case mystery = "aW"
-            case romance = "8c"
-            case scienceFiction = "9a"
-            case thriller = "a8"
-            case tvMovie = "1hO"
-            case war = "9u"
-            case western = "8Q"
+        case adventure = "9k"
+        case animation = "8m"
+        case comedy = "7I"
+        case crime = "9Y"
+        case documentary = "ai"
+        case drama = "7S"
+        case family = "8w"
+        case fantasy = "82"
+        case history = "90"
+        case horror = "aC"
+        case music = "b6"
+        case mystery = "aW"
+        case romance = "8c"
+        case scienceFiction = "9a"
+        case thriller = "a8"
+        case tvMovie = "1hO"
+        case war = "9u"
+        case western = "8Q"
         static var paramName = "genre"
         
         public var genre: Genre {
@@ -95,12 +95,12 @@ extension Letterboxd {
     
     //MARK: - =============== LANGUAGES ===============
     public struct LanguagesResponse: Codable {
-        let items:[Language]
+        public let items:[Language]
     }
     
     public struct Language:Codable {
-        let code:String
-        let name:String
+        public let code:String
+        public let name:String
     }
     
 }

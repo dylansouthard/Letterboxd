@@ -40,46 +40,46 @@ extension Letterboxd {
     }
 
     public struct ContributionStatistics: Codable {
-        let type: ContributionType
-        let filmCount: Int
+        public let type: ContributionType
+        public let filmCount: Int
     }
 
     public struct ContributorStatistics: Codable {
-        let contributions: [ContributionStatistics]
+        public let contributions: [ContributionStatistics]
     }
 
     public struct Contributor: Codable {
-        let id: String
-        let name: String
-        let tmdbid: String?
-        let statistics: ContributorStatistics
-        let links: [Link]
+        public let id: String
+        public let name: String
+        public let tmdbid: String?
+        public let statistics: ContributorStatistics
+        public let links: [Link]
     }
     
     public struct ContributorSummary: Codable {
-        let id: String
-        let name: String
-        let characterName: String?
-        let tmdbid: String?
+        public let id: String
+        public let name: String
+        public let characterName: String?
+        public let tmdbid: String?
     }
     
     public struct FilmContribution:Codable {
-        let type:ContributionType
-        let film:FilmSummary
-        let characterName:String?
+        public let type:ContributionType
+        public let film:FilmSummary
+        public let characterName:String?
     }
 
     
     public struct FilmContributorMetadata:Codable {
-        let type:ContributionType
-        let data:FilmsMetadata
+        public let type:ContributionType
+        public let data:FilmsMetadata
     }
     
     public struct FilmContributionsResponse:Codable {
-        let next:String?
-        let items:[FilmContribution]
-        let metadata:[FilmContributorMetadata]
-        let relationships:[FilmContributorMemberRelationship]
+        public let next:String?
+        public let items:[FilmContribution]
+        public let metadata:[FilmContributorMetadata]
+        public let relationships:[FilmContributorMemberRelationship]
     }
     
 

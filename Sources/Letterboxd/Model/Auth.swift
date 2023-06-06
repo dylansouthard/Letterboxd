@@ -9,15 +9,15 @@ import Foundation
 
 extension Letterboxd {
     public struct LoginTokenResponse:Codable {
-        var token:String
+        public var token:String
     }
     
     public struct UploadURLResponse:Codable {
-        let url:String
+        public let url:String
     }
     
     public struct UsernameCheckResonse:Codable {
-        let result:Result
+        public let result:Result
         
         public enum Result:String, Codable {
            case available = "Available"

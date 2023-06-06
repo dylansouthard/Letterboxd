@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol LBSearchItem: Codable {
+public protocol LBSearchItem: Codable {
     var score: Double {get}
     var type: Letterboxd.SearchItemType { get }
 }
@@ -15,7 +15,7 @@ protocol LBSearchItem: Codable {
 extension Letterboxd {
     
     //MARK: - =============== SEARCH ITEM TYPES ===============
-
+    
     public enum SearchItemType: String, Codable {
         
         case contributor = "ContributorSearchItem"
@@ -29,69 +29,69 @@ extension Letterboxd {
         case podcast = "PodcastSearchItem"
         case unknown
         
-    
+        
     }
     
     //MARK: - =============== SEARCH ITEMS ===============
-
+    
     public struct ArticleSearchItem: Codable, LBSearchItem {
-        let score: Double
-        let type: Letterboxd.SearchItemType
-        let article: NewsItem
+        public let score: Double
+        public let type: Letterboxd.SearchItemType
+        public let article: NewsItem
     }
     
     public struct ContributorSearchItem: Codable, LBSearchItem {
-        var score: Double
-        let type: Letterboxd.SearchItemType
-        let contributor: Contributor
+        public let score: Double
+        public let type: Letterboxd.SearchItemType
+        public let contributor: Contributor
     }
     
     public struct FilmSearchItem: Codable, LBSearchItem {
-        let score:Double
-        let type: Letterboxd.SearchItemType
-        let film: FilmSummary
+        public let score:Double
+        public let type: Letterboxd.SearchItemType
+        public let film: FilmSummary
         
     }
     
     public struct ListSearchItem: Codable, LBSearchItem {
-        let score: Double
-        let type: Letterboxd.SearchItemType
-        let list: ListSummary
+        public let score: Double
+        public let type: Letterboxd.SearchItemType
+        public let list: ListSummary
     }
     
     public struct ReviewSearchItem: Codable, LBSearchItem {
-        let score: Double
-        let type: Letterboxd.SearchItemType
-        let review: LogEntry
+        public let score: Double
+        public let type: Letterboxd.SearchItemType
+        public let review: LogEntry
     }
     
     public struct MemberSearchItem:Codable, LBSearchItem {
-        let score:Double
-        let type: Letterboxd.SearchItemType
-        let member:MemberSummary
+        public let score:Double
+        public let type: Letterboxd.SearchItemType
+        public let member:MemberSummary
     }
     
     public struct PodcastSearchItem: Codable, LBSearchItem {
-        let score: Double
-        let type: Letterboxd.SearchItemType
-        let podcast: NewsItem
+        public let score: Double
+        public let type: Letterboxd.SearchItemType
+        public let podcast: NewsItem
     }
     
     public struct StorySearchItem:Codable, LBSearchItem {
-        let score:Double
-        let type: Letterboxd.SearchItemType
-        let story:StorySummary
+        public let score:Double
+        public let type: Letterboxd.SearchItemType
+        public let story:StorySummary
     }
     
     public struct TagSearchItem: Codable, LBSearchItem {
-        let score:Double
-        let type: Letterboxd.SearchItemType
-        let tag:Tag
+        public let score:Double
+        public let type: Letterboxd.SearchItemType
+        public let tag:Tag
     }
     
     public struct UnknownSearchItem: Codable, LBSearchItem {
-        let score:Double
-        let type: Letterboxd.SearchItemType
+        public let score:Double
+        public let type: Letterboxd.SearchItemType
         
     }
     
@@ -99,10 +99,9 @@ extension Letterboxd {
     //MARK: - =============== RESPONSE ===============
     
     public struct SearchResponse: Decodable {
-        let items: [LBSearchItem]
-        let next:String?
-        var cursor:String? {return next}
-
+        public let items: [LBSearchItem]
+        public let next:String?
+        
         enum SearchResponseKey: String, CodingKey {
             case items
             case next
@@ -111,7 +110,7 @@ extension Letterboxd {
         enum SearchItemTypeKey: CodingKey {
             case type
         }
-
+        
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: SearchResponseKey.self)
             var searchItemArrayForType = try container.nestedUnkeyedContainer(forKey: SearchResponseKey.items)
@@ -177,8 +176,8 @@ extension Letterboxd {
             }
             self.items = _items
             self.next = try? container.decode(String.self, forKey: .next)
-            }
-       
+        }
+        
     }
 }
 
