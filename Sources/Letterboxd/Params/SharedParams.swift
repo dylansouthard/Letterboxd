@@ -10,8 +10,11 @@ import Foundation
 extension LBParams {
    
     public struct Pagination:LBParamConvertible {
-        var cursor:String? = nil
-        var perPage:Int?
+        /// Indicates the starting point of a page. Returned as "next" from previous results.
+        public var cursor:String? = nil
+        /// The number of items per page.
+        public var perPage:Int?
+        
         var urlQueryItems: [URLQueryItem] {
             return URLQueryItem.array(fromString: cursor, named: "cursor") + URLQueryItem.array(fromInt: perPage, named: "perPage")
         }
@@ -31,9 +34,12 @@ extension LBParams {
     }
     
     public struct Comments:LBParamConvertible {
-        var includeDeletions:Bool?
-        var pagination:Pagination = Pagination()
-        var sortBy:SortRule?
+        /// Indicates if deleted comments should be included in the response.
+        public var includeDeletions:Bool?
+        /// The pagination parameters.
+        public var pagination:Pagination = Pagination()
+        /// Determines the sorting rule for the comments.
+        public var sortBy:SortRule?
         
         var urlQueryItems: [URLQueryItem] {
             return URLQueryItem.array(fromBool: includeDeletions, named: "includeDeletions") + pagination.urlQueryItems + URLQueryItem.array(fromParam:sortBy)
@@ -58,10 +64,14 @@ extension LBParams {
     }
     
     public struct DateParams:LBParamConvertible {
-        let year:Int
-        let month:Int?
-        let week:Int?
-        let day:Int?
+        /// Represents the year in the date parameters.
+        public let year:Int
+        /// Represents the month in the date parameters (requires year).
+        public let month:Int?
+        /// Represents the week in the date parameters (requires year. If month or day is specified this will be ignored).
+        public let week:Int?
+        /// Represents the day in the date parameters.
+        public let day:Int?
         
         var urlQueryItems: [URLQueryItem] {
             var _items = [URLQueryItem(name: "year", value: "\(year)")]
@@ -99,8 +109,11 @@ extension LBParams {
     }
     
     public struct Rating:LBParamConvertible {
-        var min: Double?
-        var max: Double?
+        /// Lower bound of the rating range. Should be between 0.5 and 5.
+        public var min: Double?
+        /// Upper bound of the rating range. Should be between `min` and 5.
+        public var max: Double?
+
 
         func roundedToNearestHalf(_ value: Double) -> Double {
             return round(value * 2) / 2
@@ -141,9 +154,12 @@ extension LBParams {
     }
     
     public struct Tag:LBParamConvertible {
-        let tagCode:String
-        let tagger:String?
-        let includeTaggerFriends:IncludeTaggerFriendsType?
+        /// Identifier for the tag.
+        public let tagCode:String
+        /// Identifier of the user who added the tag.
+        public var tagger:String?
+        /// Specifies whether to include friends of the tagger in the response.
+        public var includeTaggerFriends:IncludeTaggerFriendsType?
         
         var urlQueryItems:[URLQueryItem] {
             return [URLQueryItem(name: "tagCode", value: tagCode)] + URLQueryItem.array(fromString:tagger, named: "tagger") + URLQueryItem.array(fromParam:includeTaggerFriends)

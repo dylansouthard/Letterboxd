@@ -9,10 +9,17 @@ import Foundation
 
 extension LBParams {
     public struct FilmCollection:LBParamConvertible {
-        var films:FilmParams = FilmParams()
-        var member:FilmMemberRelationship?
-        var tag:Tag?
-        var sortBy:SortRule?
+        /// Filters to be applied on the retrieved films.
+            public var films:FilmParams = FilmParams()
+            
+            /// Specifies the member and type of relationship.
+            public var member:FilmMemberRelationship?
+            
+            /// Specifies the tag to filter the film collection.
+            public var tag:Tag?
+            
+            /// Determines the sorting rule for the retrieved list.
+            public var sortBy:SortRule?
         
         var urlQueryItems: [URLQueryItem] {
             return films.urlQueryItems + (member?.urlQueryItems ?? []) + (tag?.urlQueryItems ?? []) + URLQueryItem.array(fromParam:sortBy)

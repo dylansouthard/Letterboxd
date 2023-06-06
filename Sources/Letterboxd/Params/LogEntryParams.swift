@@ -9,19 +9,44 @@ import Foundation
 
 extension LBParams {
     public struct LogEntries:LBParamConvertible {
-        var filters:[Filter] = []
-        var film:String? = nil
-        var member:LogEntryMemberRelationship? = nil
-        var memberFilters:[Members.ResultsFilter] = []
-        var date:DateParams?
-        var rating:Rating = Rating()
-        var filmDate:ReleaseDate = ReleaseDate()
-        var genre:Genre = Genre()
-        var region:Region = Region()
-        var tag:Tag? = nil
-        var service:Letterboxd.FilmService? = nil
-        var pagination:Pagination = Pagination()
-        var sortBy:SortRule? = nil
+        /// Array of filter rules applied to the log entries.
+        public var filters:[Filter] = []
+        
+        /// The unique identifier of the film in the log entries.
+        public var film:String? = nil
+        
+        /// The relationship of the log entry with a member.
+        public var member:LogEntryMemberRelationship? = nil
+        
+        /// Array of filters applied to the log entry members.
+        public var memberFilters:[Members.ResultsFilter] = []
+        
+        /// Parameters related to the date of the log entry.
+        public var date:DateParams?
+        
+        /// Parameters related to the rating of the log entry.
+        public var rating:Rating = Rating()
+        
+        /// Parameters related to the release date of the film in the log entry.
+        public var filmDate:ReleaseDate = ReleaseDate()
+        
+        /// Parameters related to the genre of the film in the log entry.
+        public var genre:Genre = Genre()
+        
+        /// Parameters related to the region of the film in the log entry.
+        public var region:Region = Region()
+        
+        /// The tag associated with the log entry.
+        public var tag:Tag? = nil
+        
+        /// The streaming service where the film is available.
+        public var service:Letterboxd.FilmService? = nil
+        
+        /// Parameters to control pagination.
+        public var pagination:Pagination = Pagination()
+        
+        /// Rule by which to sort the log entries.
+        public var sortBy:SortRule? = nil
         
         var urlQueryItems: [URLQueryItem] {
             let _items = filters.map { $0.asURLQueryItem } + URLQueryItem.array(fromString: film, named: "film") + (member?.urlQueryItems ?? []) + (date?.urlQueryItems ?? []) + rating.urlQueryItems
@@ -37,7 +62,7 @@ extension LBParams {
         
         /**
          Specifies parameters for fetching log entries.
-
+         
          - Parameter filters: Array of filter rules applied to the log entries.
          - Parameter film: The unique identifier of the film in the log entries.
          - Parameter member: The relationship of the log entry with a member.
@@ -79,7 +104,7 @@ extension LBParams {
             self.pagination = pagination
             self.sortBy = sortBy
         }
-
+        
         
         public enum SortRule: String, Codable, LBParamType {
             case whenAdded = "WhenAdded"
@@ -121,7 +146,7 @@ extension LBParams {
             
             static var paramName: String{"sort"}
             
-           public init(from decoder: Decoder) throws {
+            public init(from decoder: Decoder) throws {
                 self = try SortRule(rawValue: decoder.singleValueContainer().decode(String.self)) ?? .whenAdded
             }
         }
@@ -158,7 +183,7 @@ extension LBParams {
             case tv = "TV"
             static var paramName: String {"where"}
         }
-
+        
     }
-       
+    
 }

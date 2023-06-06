@@ -21,8 +21,11 @@ extension LBParams {
     //MARK: - =============== MEMBER ===============
     
     public struct MemberRelationship:LBParamConvertible {
-        let member:String
-        let type:MemberRelationshipType
+        /// The identifier for the member.
+        public let member:String
+        /// The type of the relationship.
+        public let type:MemberRelationshipType
+
         
         var urlQueryItems: [URLQueryItem] {[URLQueryItem(name: "member", value: member), type.urlQueryItem("memberRelationship")]}
         
@@ -41,8 +44,11 @@ extension LBParams {
     }
     
     public struct MemberFilmRelationship:LBParamConvertible {
-        let film:String
-        let type:MemberFilmRelationshipType
+        /// The identifier for the film.
+        public let film:String
+        /// The type of the relationship.
+        public let type:MemberFilmRelationshipType
+        
         var urlQueryItems: [URLQueryItem] {[URLQueryItem(name: "film", value: film), type.urlQueryItem("filmRelationship")]}
         
         // MemberFilmRelationship
@@ -59,8 +65,11 @@ extension LBParams {
     }
     
     public struct MemberListRelationship:LBParamConvertible {
-        let list:String
-        let type:MemberListRelationshipType
+        /// The identifier for the list.
+        public let list:String
+        /// The type of the relationship.
+        public let type:MemberListRelationshipType
+        
         var urlQueryItems: [URLQueryItem] {[URLQueryItem(name: "list", value: list), type.urlQueryItem("listRelationship")]}
         
         // MemberListRelationship
@@ -79,9 +88,12 @@ extension LBParams {
     //MARK: - =============== FILM ===============
     
     public struct FilmMemberRelationship:LBParamConvertible {
-        var member: String
-        var type: MemberFilmRelationshipType?
-        var includeFriends: Members.IncludeFriendsType?
+        /// The identifier for the member.
+        public var member: String
+        /// The type of the relationship.
+        public var type: MemberFilmRelationshipType?
+        /// Specifies if friends should be included.
+        public var includeFriends: Members.IncludeFriendsType?
         
         var urlQueryItems: [URLQueryItem] { [URLQueryItem(name: "member", value: member)] + URLQueryItem.array(fromRelType:type, name: "memberRelationship") + URLQueryItem.array(fromParam: includeFriends)}
         
@@ -106,9 +118,12 @@ extension LBParams {
     //MARK: - =============== LIST ===============
     
     public struct ListMemberRelationship:LBParamConvertible {
-        var member: String
-        var type: MemberListRelationshipType?
-        var includeFriends: Members.IncludeFriendsType?
+        /// The identifier for the member.
+        public var member: String
+        /// The type of relationship.
+        public var type: MemberListRelationshipType?
+        /// Specifies if friends of the member should be included.
+        public var includeFriends: Members.IncludeFriendsType?
         
         var urlQueryItems: [URLQueryItem] { [URLQueryItem(name: "member", value: member)] + URLQueryItem.array(fromRelType:type, name: "memberRelationship") + URLQueryItem.array(fromParam: includeFriends)}
         
@@ -130,10 +145,14 @@ extension LBParams {
     //MARK: - =============== LOG ENTRY ===============
     
     public struct LogEntryMemberRelationship:LBParamConvertible {
-        var member: String
-        var type: MemberLogEntryRelationshipType?
-        var filmRelationship:MemberFilmRelationshipType?
-        var includeFriends: Members.IncludeFriendsType?
+        /// The identifier for the member.
+        public var member: String
+        /// The type of the relationship.
+        public var type: MemberLogEntryRelationshipType?
+        /// The relationship type between the film and the member.
+        public var filmRelationship:MemberFilmRelationshipType?
+        /// Specifies if friends should be included.
+        public var includeFriends: Members.IncludeFriendsType?
         
         var urlQueryItems: [URLQueryItem] { [URLQueryItem(name: "member", value: member)] + URLQueryItem.array(fromRelType:type, name: "memberRelationship") + URLQueryItem.array(fromRelType:filmRelationship, name: "filmRelationship") + URLQueryItem.array(fromParam: includeFriends)}
         
@@ -156,8 +175,10 @@ extension LBParams {
     
     //MARK: - =============== STORY ===============
     public struct StoryMemberRelationship:LBParamConvertible {
-        var member:String
-        var filters:[Filter] = []
+        /// The identifier for the member.
+        public var member:String
+        /// The filters to apply.
+        public var filters:[Filter] = []
         
         var urlQueryItems: [URLQueryItem] {
             return [URLQueryItem(name: "member", value: member)] + filters.asURLQueryItems

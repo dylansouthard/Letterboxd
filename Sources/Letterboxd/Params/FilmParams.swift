@@ -9,11 +9,20 @@ import Foundation
 extension LBParams {
 
     public struct Films:LBParamConvertible {
-        var films:FilmParams = FilmParams()
-        var member:FilmMemberRelationship?
-        var tag:Tag?
-        var pagination:Pagination = Pagination()
-        var sortBy:SortRule?
+        /// Specifies criteria for the films to retrieve.
+            public var films:FilmParams = FilmParams()
+            
+            /// Defines the relationship with a member. Can be used to retrieve films connected to a particular member.
+            public var member:FilmMemberRelationship?
+            
+            /// Specifies a tag. Retrieves films that are tagged with this.
+            public var tag:Tag?
+            
+            /// Pagination settings for the retrieved list.
+            public var pagination:Pagination = Pagination()
+            
+            /// Determines the sorting rule for the retrieved list.
+            public var sortBy:SortRule?
         
         var urlQueryItems: [URLQueryItem] {
             return films.urlQueryItems + (member?.urlQueryItems ?? []) + (tag?.urlQueryItems ?? []) + pagination.urlQueryItems + URLQueryItem.array(fromParam:sortBy)
@@ -78,9 +87,14 @@ extension LBParams {
     //MARK: - =============== film/{id}/members ===============
     public struct FilmRelatedMembers:LBParamConvertible {
         
-        var member:MemberRelationship?
-        var pagination = Pagination()
-        var sortBy:Members.SortRule?
+        /// Specifies the member and type of relationship.
+        public var member:MemberRelationship?
+        
+        /// Pagination settings for the retrieved list.
+        public var pagination:Pagination = Pagination()
+        
+        /// Determines the sorting rule for the retrieved list.
+        public var sortBy:Members.SortRule?
         
         var urlQueryItems: [URLQueryItem] {
             return (member?.urlQueryItems ?? []) + pagination.urlQueryItems + URLQueryItem.array(fromParam: sortBy)
@@ -105,13 +119,23 @@ extension LBParams {
     
     //MARK: - =============== SHARED FILMS PARAMS ===============
     public struct FilmParams:LBParamConvertible {
+        /// List of film IDs to search for.
+        public var filmIDs:[FilmID] = []
         
-        var filmIDs:[FilmID] = []
-        var genre:Genre = Genre()
-        var region:Region = Region()
-        var releaseDate:ReleaseDate = ReleaseDate()
-        var service:Letterboxd.FilmService? = nil
-        var filters:[Filter] = []
+        /// Genre parameters for the films to search for.
+        public var genre:Genre = Genre()
+        
+        /// Region parameters for the films to search for.
+        public var region:Region = Region()
+        
+        /// Release date parameters for the films to search for.
+        public var releaseDate:ReleaseDate = ReleaseDate()
+        
+        /// The film service to use for searching films.
+        public var service:Letterboxd.FilmService? = nil
+        
+        /// Additional filters to apply when searching for films.
+        public var filters:[Filter] = []
         
         var urlQueryItems: [URLQueryItem] {
             return filmIDs.map{$0.asURLQueryItem} + genre.urlQueryItems + region.urlQueryItems + releaseDate.urlQueryItems + (service.map{[$0.asURLQueryItem]} ?? []) + filters.map{$0.asURLQueryItem}
@@ -176,8 +200,8 @@ extension LBParams {
     
     
     public struct FilmID {
-        let id:String
-        let externalType:ExternalFilmIDType?
+        public let id:String
+        public let externalType:ExternalFilmIDType?
         
         public enum ExternalFilmIDType:String {
             case tmdb
@@ -199,10 +223,15 @@ extension LBParams {
     
     //MARK: - === GENRE PARAMS ===
     public struct Genre:LBParamConvertible {
-        
-        var genre:Letterboxd.GenreType? = nil
-        var includeGenres:[Letterboxd.GenreType] = []
-        var excludeGenres:[Letterboxd.GenreType] = []
+        /// Specifies a single genre to filter by.
+            public var genre:Letterboxd.GenreType? = nil
+            
+            /// List of genres to include in the results.
+            public var includeGenres:[Letterboxd.GenreType] = []
+            
+            /// List of genres to exclude from the results.
+            public var excludeGenres:[Letterboxd.GenreType] = []
+            // ...
         
         var urlQueryItems: [URLQueryItem] {
             let included = includeGenres.map { URLQueryItem(name: "includeGenre", value: $0.rawValue) }
@@ -229,8 +258,11 @@ extension LBParams {
 
     //MARK: - === REGION PARAMS ===
     public struct Region:LBParamConvertible {
-        var country:String? = nil
-        var language:String? = nil
+        /// The country of the film.
+        public var country:String? = nil
+        
+        /// The language of the film.
+        public var language:String? = nil
         
         var urlQueryItems: [URLQueryItem] {
             return (country.map { [URLQueryItem(name: "country", value: $0)] } ?? []) + (language.map { [URLQueryItem(name: "language", value: $0)] } ?? [])
@@ -251,8 +283,11 @@ extension LBParams {
 
     //MARK: - === RELEASE DATE PARAMS ===
     public struct ReleaseDate:LBParamConvertible {
-        var decade: Int? = nil
-        var year:Int? = nil
+        /// The decade when the film was released.
+        public var decade: Int? = nil
+        
+        /// The specific year when the film was released.
+        public var year:Int? = nil
         
         var urlQueryItems: [URLQueryItem] {
             return urlQueryItemsNamed(decade: "decade", year: "year")

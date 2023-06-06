@@ -10,9 +10,12 @@ import Foundation
 extension LBParams {
     
     public struct Stories:LBParamConvertible {
-        var member:StoryMemberRelationship?
-        var sortBy:SortRule?
-        var pagination:Pagination = Pagination()
+        /// Specifies the member relationship to include in the stories results.
+        public var member:StoryMemberRelationship?
+        /// Specifies the rule to use when sorting the stories results.
+        public var sortBy:SortRule?
+        /// Specifies the pagination rules for the stories results. Defaults to an instance of Pagination with default values.
+        public var pagination:Pagination = Pagination()
         
         var urlQueryItems: [URLQueryItem] {
             return (member?.urlQueryItems ?? []) + URLQueryItem.array(fromParam: sortBy) + pagination.urlQueryItems

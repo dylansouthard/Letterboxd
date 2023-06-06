@@ -8,18 +8,35 @@
 import Foundation
 
 extension LBParams {
-  
+    
     
     public struct Lists:LBParamConvertible {
-        var filters:[Filter] = []
-        var film:String?
-        var clonedFrom:String?
-        var tag:Tag?
-        var member:ListMemberRelationship?
-        var memberFilters:[Members.ResultsFilter] = []
-        var filmsOfNote:[String] = []
-        var pagination:Pagination = Pagination()
-        var sortBy:SortRule?
+        /// Array of filter rules applied to the lists.
+        public var filters:[Filter] = []
+        
+        /// The unique identifier of a film.
+        public var film:String?
+        
+        /// The unique identifier of a list from which the list was cloned.
+        public var clonedFrom:String?
+        
+        /// The tag associated with the list.
+        public var tag:Tag?
+        
+        /// The relationship of the list with a member.
+        public var member:ListMemberRelationship?
+        
+        /// Array of filters applied to the list members.
+        public var memberFilters:[Members.ResultsFilter] = []
+        
+        /// Array of identifiers of notable films.
+        public var filmsOfNote:[String] = []
+        
+        /// Parameters to control pagination.
+        public var pagination:Pagination = Pagination()
+        
+        /// Rule by which to sort the lists.
+        public var sortBy:SortRule?
         
         var urlQueryItems: [URLQueryItem] {
             let _items = filters.map{$0.asURLQueryItem} + URLQueryItem.array(fromString:film, named: "film") + URLQueryItem.array(fromString: clonedFrom, named: "clonedFrom")
@@ -30,7 +47,7 @@ extension LBParams {
         // Lists
         /**
          Specifies parameters for fetching lists.
-
+         
          - Parameter filters: Array of filter rules applied to the lists.
          - Parameter film: The unique identifier of a film.
          - Parameter clonedFrom: The unique identifier of a list from which the list was cloned.
@@ -99,11 +116,20 @@ extension LBParams {
     }
     
     public struct ListEntries:LBParamConvertible {
-        var films:FilmParams = FilmParams()
-        var member:FilmMemberRelationship?
-        var tag:Tag?
-        var pagination:Pagination = Pagination()
-        var sortBy:SortRule?
+        /// Parameters related to films to be included in the results.
+        public var films:FilmParams = FilmParams()
+        
+        /// The relationship of the entry with a member.
+        public var member:FilmMemberRelationship?
+        
+        /// The tag associated with the entry.
+        public var tag:Tag?
+        
+        /// Parameters to control pagination.
+        public var pagination:Pagination = Pagination()
+        
+        /// Rule by which to sort the list entries.
+        public var sortBy:SortRule?
         
         var urlQueryItems: [URLQueryItem] {
             return films.urlQueryItems + (member?.urlQueryItems ?? []) + (tag?.urlQueryItems ?? []) + pagination.urlQueryItems + URLQueryItem.array(fromParam:sortBy)
@@ -112,7 +138,7 @@ extension LBParams {
         // ListEntries
         /**
          Specifies parameters for fetching entries from a list.
-
+         
          - Parameter films: Parameters related to films to be included in the results.
          - Parameter member: The relationship of the entry with a member.
          - Parameter tag: The tag associated with the entry.

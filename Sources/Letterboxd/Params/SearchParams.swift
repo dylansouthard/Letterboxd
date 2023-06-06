@@ -8,11 +8,16 @@
 import Foundation
 extension LBParams {
     public struct Search:LBParamConvertible {
-        var include:[SearchItemType] = []
-        var contributionType:Letterboxd.ContributionType?
-        var searchMethod:SearchMethod?
-        var adult:Bool?
-        var pagination:Pagination = Pagination()
+        /// Specifies the types of items to include in the search results. Defaults to an empty array.
+        public var include:[SearchItemType] = []
+        /// Specifies the type of contributions to include in the search results.
+        public var contributionType:Letterboxd.ContributionType?
+        /// Specifies the method to use when conducting the search.
+        public var searchMethod:SearchMethod?
+        /// Specifies whether to include adult content in the search results. Defaults to false.
+        public var adult:Bool?
+        /// Specifies the pagination rules for the search results. Defaults to an instance of Pagination with default values.
+        public var pagination:Pagination = Pagination()
         
         var urlQueryItems: [URLQueryItem] {
             var i = include

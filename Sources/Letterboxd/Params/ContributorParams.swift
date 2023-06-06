@@ -9,13 +9,23 @@ import Foundation
 
 extension LBParams {
     public struct Contributions:LBParamConvertible {
+        /// Specifies the type of contribution.
+        public var contribution:Letterboxd.ContributionType? = nil
         
-        var contribution:Letterboxd.ContributionType? = nil
-        var films:FilmParams = FilmParams()
-        var member:FilmMemberRelationship? = nil
-        var tag:Tag? = nil
-        var pagination:Pagination = Pagination()
-        var sortBy:SortRule? = nil
+        /// Filters to be applied on the retrieved films.
+        public var films:FilmParams = FilmParams()
+        
+        /// Specifies the member and type of relationship for the returned films.
+        public var member:FilmMemberRelationship? = nil
+        
+        /// Specifies the tag to filter the contributions.
+        public var tag:Tag? = nil
+        
+        /// Pagination settings for the retrieved list.
+        public var pagination:Pagination = Pagination()
+        
+        /// Determines the sorting rule for the retrieved list.
+        public var sortBy:SortRule? = nil
         
         
         
@@ -75,3 +85,5 @@ extension LBParams {
         
     }
 }
+
+

@@ -150,7 +150,7 @@ More detailed documentation on each endpoint can be found in the source code.
 
 
 ## Limitations
-This Swift wrapper is a work in progress and currently does not provide full coverage of the Letterboxd API. The package supports all available requests, mainly GET requests and the POST request for generating an authentication token. However, many of the API's endpoints are still under development by Letterboxd. As these endpoints become available, they will be added to this package.
+This Swift wrapper is a work in progress and currently does not provide full coverage of the Letterboxd API. The package supports all requests available at the time of this writing, mainly GET requests and the POST request for generating an authentication token. However, many of the API's endpoints are still under development by Letterboxd. As these endpoints become available, they will be added to this package.
 
 While the basic functionality of the package has been tested, not every possible parameter for every request has been extensively tested. If you encounter any issues or unexpected behavior, please feel free to raise an issue or submit a pull request.
 

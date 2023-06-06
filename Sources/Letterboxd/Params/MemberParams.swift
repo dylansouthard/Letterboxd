@@ -12,12 +12,23 @@ extension LBParams {
     //MARK: - =============== MEMBER ===============
     
     public struct Members:LBParamConvertible {
-        var member:MemberRelationship?
-        var film:MemberFilmRelationship?
-        var list:MemberListRelationship?
-        var review:String?
-        var pagination:Pagination = Pagination()
-        var sortBy:SortRule?
+        /// Relationship details about the member.
+            public var member:MemberRelationship?
+            
+            /// Film related details of the member.
+            public var film:MemberFilmRelationship?
+            
+            /// List related details of the member.
+            public var list:MemberListRelationship?
+            
+            /// Unique identifier of the member's review.
+            public var review:String?
+            
+            /// Parameters to control pagination.
+            public var pagination:Pagination = Pagination()
+            
+            /// Rule by which to sort the members.
+            public var sortBy:SortRule?
 
         
         var urlQueryItems: [URLQueryItem] {
@@ -30,7 +41,7 @@ extension LBParams {
             return URLQueryItem.array(fromParam: sortBy) + m + l + r + p + f
         }
         
-        // Members struct
+        // Members Params
         /**
          Specifies parameters for fetching members.
 
@@ -84,17 +95,23 @@ extension LBParams {
     }
     
     public struct Activity:LBParamConvertible {
+        /// Array of types of activities to include.
+        public var include:[ActivityType] = []
         
-        var include:[ActivityType] = []
-        var filters:[Filter] = []
-        var adult:Bool?
-        var pagination:Pagination = Pagination()
+        /// Array of filters to apply to the activities.
+        public var filters:[Filter] = []
+        
+        /// Whether to include adult content.
+        public var adult:Bool?
+        
+        /// Parameters to control pagination.
+        public var pagination:Pagination = Pagination()
         
         var urlQueryItems: [URLQueryItem] {
             return include.map{$0.asURLQueryItem} + filters.map{$0.asURLQueryItem} + URLQueryItem.array(fromBool: adult, named: "adult") + pagination.urlQueryItems
         }
         
-        // Activity struct
+        // Activity Params
         /**
          Specifies parameters for fetching activities.
 
@@ -148,16 +165,26 @@ extension LBParams {
     }
     
     public struct Watchlist:LBParamConvertible {
-        var films:FilmParams = FilmParams()
-        var member:FilmMemberRelationship?
-        var tag:Tag?
-        var pagination:Pagination = Pagination()
-        var sortBy:SortRule?
+        /// Parameters related to the films in the watchlist.
+        public var films:FilmParams = FilmParams()
+        
+        /// Relationship details of the member associated with the film in the watchlist.
+        public var member:FilmMemberRelationship?
+        
+        /// Tag associated with the watchlist.
+        public var tag:Tag?
+        
+        /// Parameters to control pagination.
+        public var pagination:Pagination = Pagination()
+        
+        /// Rule by which to sort the films in the watchlist.
+        public var sortBy:SortRule?
+        
         var urlQueryItems: [URLQueryItem] {
             return films.urlQueryItems + (member?.urlQueryItems ?? []) + (tag?.urlQueryItems ?? []) + pagination.urlQueryItems + URLQueryItem.array(fromParam: sortBy)
         }
         
-        // Watchlist struct
+        // Watchlist Params
         /**
          Specifies parameters for fetching a watchlist.
 
