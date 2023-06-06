@@ -24,7 +24,7 @@ extension Letterboxd {
         handler: @escaping (Result<SearchResponse, Error>) -> Void
     ) {
         
-        let urlString = baseURL + "searchbb"
+        let urlString = baseURL + "search"
 
         let query = LBQuery(urlString, queryParams: [URLQueryItem.input(query)] + (params?.urlQueryItems ?? []))
 
