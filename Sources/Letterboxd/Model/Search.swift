@@ -119,60 +119,59 @@ extension Letterboxd {
             var searchItemArray = searchItemArrayForType
             
             while(!searchItemArrayForType.isAtEnd) {
-                let item = try searchItemArrayForType.nestedContainer(keyedBy: SearchItemTypeKey.self)
-                let type = item.decode(SearchItemType.self, forKey: SearchItemTypeKey.type)
-                switch type {
-                case .contributor:
-                    tryCatchPrintError {
+                do {
+                    let item = try searchItemArrayForType.nestedContainer(keyedBy: SearchItemTypeKey.self)
+                    let type = item.decode(SearchItemType.self, forKey: SearchItemTypeKey.type)
+                    switch type {
+                    case .contributor:
                         let contributor = try searchItemArray.decode(ContributorSearchItem.self)
                         _items.append(contributor)
-                    }
-                case .film:
-                    tryCatchPrintError {
+                        
+                    case .film:
                         let film = try searchItemArray.decode(FilmSearchItem.self)
                         _items.append(film)
-                    }
-                case .list:
-                    tryCatchPrintError {
+                        
+                    case .list:
                         let film = try searchItemArray.decode(ListSearchItem.self)
                         _items.append(film)
-                    }
-                case .member:
-                    tryCatchPrintError {
+                        
+                    case .member:
                         let item = try searchItemArray.decode(MemberSearchItem.self)
                         _items.append(item)
-                    }
-                case .review:
-                    tryCatchPrintError {
+                        
+                    case .review:
                         let item = try searchItemArray.decode(ReviewSearchItem.self)
                         _items.append(item)
-                    }
-                case .tag:
-                    tryCatchPrintError {
+                        
+                    case .tag:
                         let item = try searchItemArray.decode(TagSearchItem.self)
                         _items.append(item)
-                    }
-                case .story:
-                    tryCatchPrintError {
+                        
+                    case .story:
                         let item = try searchItemArray.decode(StorySearchItem.self)
                         _items.append(item)
-                    }
-                case .article:
-                    tryCatchPrintError {
+                        
+                    case .article:
                         let item = try searchItemArray.decode(ArticleSearchItem.self)
                         _items.append(item)
-                    }
-                case .podcast:
-                    tryCatchPrintError {
+                        
+                    case .podcast:
                         let item = try searchItemArray.decode(PodcastSearchItem.self)
                         _items.append(item)
+                        
+                    default:
+                        let item = try searchItemArray.decode(UnknownSearchItem.self)
+                        _items.append(item)
+                        
                     }
-                default:
+                } catch let error {
+                    print(error)
                     tryCatchPrintError {
                         let item = try searchItemArray.decode(UnknownSearchItem.self)
                         _items.append(item)
                     }
                 }
+                
             }
             self.items = _items
             self.next = try? container.decode(String.self, forKey: .next)

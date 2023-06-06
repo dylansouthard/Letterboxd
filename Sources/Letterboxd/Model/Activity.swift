@@ -9,13 +9,13 @@ import Foundation
 
 public protocol LBActivity: Codable {
     var member: Letterboxd.MemberSummary { get }
-   var whenCreated: String { get }
-   var type: Letterboxd.ActivityType { get }
+    var whenCreated: String { get }
+    var type: Letterboxd.ActivityType { get }
 }
 
 extension Letterboxd {
     
-   public enum ActivityType: String, Codable {
+    public enum ActivityType: String, Codable {
         case diaryEntryActivity = "DiaryEntryActivity"
         case filmLikeActivity = "FilmLikeActivity"
         case filmRatingActivity = "FilmRatingActivity"
@@ -33,29 +33,30 @@ extension Letterboxd {
         case watchlistActivity = "WatchlistActivity"
         case unknown
     }
-
+    
     public struct ActivityResponse: Decodable {
         public let items: [LBActivity]
         public let next: String?
         public var cursor: String? { return next }
-
+        
         enum ActivityResponseKey: String, CodingKey {
             case items
             case next
         }
-
+        
         enum ActivityItemTypeKey: CodingKey {
             case type
         }
-
+        
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: ActivityResponseKey.self)
             var activityArrayForType = try container.nestedUnkeyedContainer(forKey: ActivityResponseKey.items)
             var _items = [LBActivity]()
             
             var activityArray = activityArrayForType
-            do {
-                while(!activityArrayForType.isAtEnd) {
+            
+            while(!activityArrayForType.isAtEnd) {
+                do {
                     let item = try activityArrayForType.nestedContainer(keyedBy: ActivityItemTypeKey.self)
                     let type = item.decode(ActivityType.self, forKey: ActivityItemTypeKey.type)
                     
@@ -111,19 +112,20 @@ extension Letterboxd {
                             _items.append(item)
                         }
                     }
+                } catch let error {
+                    print(error)
+                    tryCatchPrintError {
+                        let item = try activityArray.decode(UnknownActivity.self)
+                        _items.append(item)
+                    }
                 }
-            } catch let error {
-                print(error)
-                tryCatchPrintError {
-                    let item = try activityArray.decode(UnknownActivity.self)
-                    _items.append(item)
-                }
+                
             }
             
             self.items = _items
             self.next = try? container.decode(String.self, forKey: .next)
         }
-
+        
     }
     
     public struct DiaryEntryActivity: Codable, LBActivity {
@@ -132,14 +134,14 @@ extension Letterboxd {
         public let diaryEntry: LogEntry
         public let type: Letterboxd.ActivityType
     }
-
+    
     public struct FilmLikeActivity: Codable, LBActivity {
         public let whenCreated: String
         public let member: MemberSummary
         public let film: FilmSummary
         public let type: Letterboxd.ActivityType
     }
-
+    
     public struct FilmRatingActivity: Codable, LBActivity {
         public let whenCreated: String
         public let member: MemberSummary
@@ -147,28 +149,28 @@ extension Letterboxd {
         public let rating: Double
         public let type: Letterboxd.ActivityType
     }
-
+    
     public struct FilmWatchActivity: Codable, LBActivity {
         public let whenCreated: String
         public let member: MemberSummary
         public let film: FilmSummary
         public let type: Letterboxd.ActivityType
     }
-
+    
     public struct FollowActivity: Codable, LBActivity {
         public let whenCreated: String
         public let member: MemberSummary
         public let followed: MemberSummary
         public let type: Letterboxd.ActivityType
     }
-
+    
     public struct InvitationAcceptedActivity: Codable, LBActivity {
         public let whenCreated: String
         public let member: MemberSummary
         public let invitor: MemberSummary
         public let type: Letterboxd.ActivityType
     }
-
+    
     public struct ListActivity: Codable, LBActivity {
         public let whenCreated: String
         public let member: MemberSummary
@@ -176,7 +178,7 @@ extension Letterboxd {
         public let clonedFrom: ListSummary?
         public let type: Letterboxd.ActivityType
     }
-
+    
     public struct ListCommentActivity: Codable, LBActivity {
         public let whenCreated: String
         public let member: MemberSummary
@@ -191,20 +193,20 @@ extension Letterboxd {
         public let list: ListSummary
         public let type: Letterboxd.ActivityType
     }
-
+    
     public struct RegistrationActivity: Codable, LBActivity {
         public let whenCreated: String
         public let member: MemberSummary
         public let type: Letterboxd.ActivityType
     }
-
+    
     public struct ReviewActivity: Codable, LBActivity {
         public let whenCreated: String
         public let member: MemberSummary
         public let review: LogEntry
         public let type: Letterboxd.ActivityType
     }
-
+    
     public struct ReviewCommentActivity: Codable, LBActivity {
         public let whenCreated: String
         public let member: MemberSummary
@@ -212,21 +214,21 @@ extension Letterboxd {
         public let comment: ReviewComment
         public let type: Letterboxd.ActivityType
     }
-
+    
     public struct ReviewLikeActivity: Codable, LBActivity {
         public let whenCreated: String
         public let member: MemberSummary
         public let review: LogEntry
         public let type: Letterboxd.ActivityType
     }
-
+    
     public struct StoryActivity: Codable, LBActivity {
         public let whenCreated: String
         public let member: MemberSummary
         public let story: StorySummary
         public let type: Letterboxd.ActivityType
     }
-
+    
     public struct WatchlistActivity: Codable, LBActivity {
         public let whenCreated: String
         public let member: MemberSummary

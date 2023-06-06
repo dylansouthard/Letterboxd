@@ -150,7 +150,6 @@ extension Letterboxd {
             handler(.failure(LetterboxdError.genericError(message:"Error constructing request")))
             return
         }
-        print("--sending requrest")
         // If the request construction is successful, execute the request.
         executeRequest(request, requiresAuth:requiresAuth, isTokenRequest:isTokenRequest, handler: handler)
     }
@@ -178,10 +177,10 @@ extension Letterboxd {
             let task = URLSession.shared.dataTask(with: req) { (data, response, error) in
                 
                 // Print the response and error for debugging
-                print(response)
-                if let e = error {
-                    print(e)
-                }
+//                print(response)
+//                if let e = error {
+//                    print(e)
+//                }
                 
                 DispatchQueue.main.async {
                             if let error = error {
@@ -229,7 +228,7 @@ extension Letterboxd {
               
                 switch result {
                 case .success(let token):
-                    print(request.url)
+//                    print(request.url)
                     // If the token check is successful, add the token to the request and execute the task
                     var req = request
                     req.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")

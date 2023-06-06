@@ -11,7 +11,6 @@ import Foundation
 extension Letterboxd {
  
     //MARK: - =============== QUERY STRUCTS ===============
-    //TODO: DRY this up
     
     struct LBQuery {
         var urlString:String
@@ -23,7 +22,6 @@ extension Letterboxd {
             self.urlString = urlString
             self.queryParams = queryParams
             self.bodyParams = bodyParams
-       
             self.method = method
             
         }
@@ -58,9 +56,9 @@ extension Letterboxd {
                         handler(.failure(error))
                     }
                 } else {
-                    if let jsonString = d?.prettyPrintedJSONString {
-                        print(jsonString)
-                    }
+//                    if let jsonString = d?.prettyPrintedJSONString {
+//                        print(jsonString)
+//                    }
                     let error = NSError(domain: "", code: (response as? HTTPURLResponse)?.statusCode ?? -1, userInfo: [NSLocalizedDescriptionKey : "Unexpected server response"])
                     handler(.failure(error))
                 }
