@@ -42,9 +42,11 @@ This package manages the authentication process for you. If a request is made wi
 Letterboxd.fetchAuthToken(username: "username", password: "password")
 ```
 
- When making API requests, certain calls might require the user to be authenticated. In such cases, the `forceAuth` parameter is set to `true`.
+ When making API requests, certain calls might require the user to be authenticated. In such cases, authorization will be required by default.
 
-The following is an example of such a request:
+However, for certain API calls that can return different results based on the authentication state, the `forceAuth` parameter can be set. These requests will include authentication if available, even if `forceAuth` is not specifically set to `true`.
+
+If you want to ensure that a request only proceeds when the user is authenticated, you can set `forceAuth` to `true`. Here's an example:
 ```swift
 Letterboxd.fetchFilms(params: yourFilmParams, forceAuth: true) { result in
     // Handle result
