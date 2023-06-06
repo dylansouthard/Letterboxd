@@ -120,7 +120,7 @@ extension LBParams {
     //MARK: - =============== SHARED FILMS PARAMS ===============
     public struct FilmParams:LBParamConvertible {
         /// List of film IDs to search for.
-        public var filmIDs:[FilmID] = []
+        public var filmIDs:[String] = []
         
         /// Genre parameters for the films to search for.
         public var genre:Genre = Genre()
@@ -132,13 +132,13 @@ extension LBParams {
         public var releaseDate:ReleaseDate = ReleaseDate()
         
         /// The film service to use for searching films.
-        public var service:Letterboxd.FilmService? = nil
+        public var service:String?
         
         /// Additional filters to apply when searching for films.
         public var filters:[Filter] = []
         
         var urlQueryItems: [URLQueryItem] {
-            return filmIDs.map{$0.asURLQueryItem} + genre.urlQueryItems + region.urlQueryItems + releaseDate.urlQueryItems + (service.map{[$0.asURLQueryItem]} ?? []) + filters.map{$0.asURLQueryItem}
+            return filmIDs.map{URLQueryItem(name: "filmId", value: $0)} + genre.urlQueryItems + region.urlQueryItems + releaseDate.urlQueryItems + URLQueryItem.array(fromString: service, named: "service") + filters.map{$0.asURLQueryItem}
         }
         
         // FilmParams
@@ -146,17 +146,17 @@ extension LBParams {
          Specifies criteria for filtering and searching for films.
 
          - Parameter filmIDs: List of film IDs to search for.
-         - Parameter genre: Genre parameters for the films to search for.
+         - Parameter genre: Genre id for the films to search for.
          - Parameter region: Region parameters for the films to search for.
          - Parameter releaseDate: Release date parameters for the films to search for.
          - Parameter service: The film service to use for searching films.
          - Parameter filters: Additional filters to apply when searching for films.
          */
-        public init(filmIDs: [FilmID] = [],
+        public init(filmIDs: [String] = [],
                     genre: Genre = Genre(),
                     region: Region = Region(),
                     releaseDate: ReleaseDate = ReleaseDate(),
-                    service: Letterboxd.FilmService? = nil,
+                    service: String? = nil,
                     filters: [Filter] = []) {
             self.filmIDs = filmIDs
             self.genre = genre

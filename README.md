@@ -118,21 +118,20 @@ These parameters are then used when making requests. For example:
 ```swift
 Letterboxd.fetchFilms(
     params: LBParams.Films(
-        films: FilmParams(
+        films: LBParams.FilmParams(
             filmIDs: ["123", "456"],
-            genre: Genre(
+            genre: LBParams.Genre(
                 genre: .action,
                 includeGenres: [.adventure, .comedy],
                 excludeGenres: [.horror]
             ),
-            region: Region(...),
-            releaseDate: ReleaseDate(...),
-            service: .netflix,
+            region: LBParams.Region(...),
+            releaseDate: LBParams.ReleaseDate(...),
             filters: [.released, .notInWatchlist]
         ),
-        member: FilmMemberRelationship(...),
+        member: LBParams.FilmMemberRelationship(...),
         tag: Tag(...),
-        pagination: Pagination(...),
+        pagination: LBParams.Pagination(...),
         sortBy: .filmPopularity
     ),
     forceAuth: false, 
