@@ -10,6 +10,12 @@ import Foundation
 extension Letterboxd {
     
     //MARK: - === GET /me ===
+    /**
+    Retrieves the authenticated user's details.
+
+    - API Endpoint: GET /me
+    - Parameter handler: The closure to be invoked when the request is complete. It contains a result type that represents either a successful request containing the MemberAccount object or an Error.
+    */
     public static func fetchMyDetails(handler:@escaping(Result<MemberAccount, Error>)->Void) {
         
         let urlString = baseURL + "me"

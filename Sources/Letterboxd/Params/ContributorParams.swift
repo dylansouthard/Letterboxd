@@ -10,12 +10,14 @@ import Foundation
 extension LBParams {
     public struct Contributions:LBParamConvertible {
         
-        var pagination:Pagination = Pagination()
+        var contribution:Letterboxd.ContributionType? = nil
         var films:FilmParams = FilmParams()
         var member:FilmMemberRelationship? = nil
         var tag:Tag? = nil
+        var pagination:Pagination = Pagination()
         var sortBy:SortRule? = nil
-        var contribution:Letterboxd.ContributionType? = nil
+        
+        
         
         var urlQueryItems: [URLQueryItem] {
             let items = pagination.urlQueryItems + films.urlQueryItems + (member?.urlQueryItems ?? [])
@@ -24,6 +26,17 @@ extension LBParams {
             return items  + cont + (tag?.urlQueryItems ?? []) + URLQueryItem.array(fromParam:sortBy)
         }
         
+        // Contributions
+        /**
+         Parameters to recieve contributions of a contributor to films.
+         - Parameter contribution: Specifies the type of contribution.
+         - Parameter films: Filters to be applied on the retrieved films.
+         - Parameter member: Specifies the member and type of relationship for the returned films.
+         - Parameter tag: Specifies the tag to filter the contributions.
+         - Parameter pagination: Pagination settings for the retrieved list.
+         - Parameter sortBy: Determines the sorting rule for the retrieved list.
+         
+         */
         public init(pagination: Pagination = Pagination(),
                     films: FilmParams = FilmParams(),
                     member: FilmMemberRelationship? = nil,
@@ -37,7 +50,7 @@ extension LBParams {
             self.sortBy = sortBy
             self.contribution = contribution
         }
-        
+                
         
         //MARK: - === ENUMS ===
         public enum SortRule:String, LBParamType {

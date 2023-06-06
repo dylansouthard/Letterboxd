@@ -65,8 +65,6 @@ class LetterboxdTokenManager {
     private var tokenValid:Bool {!(accessToken == nil || tokenExpired)}
     
     
-    
-    
     //MARK: - =============== FUNCTIONS ===============
     
     //MARK: - === GENERATE/REFRESH TOKEN ===
@@ -158,6 +156,13 @@ class LetterboxdTokenManager {
                 }
             }
         }
+    }
+    
+    //MARK: - === REMOVE TOKEN DATA ===
+    func removeToken() {
+        self.accessToken = nil
+        self.refreshToken = nil
+        self.expiryTime = nil
     }
 }
 

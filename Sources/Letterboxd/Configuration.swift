@@ -18,10 +18,29 @@ public class Letterboxd {
     
     static var baseURL:String = "https://api.letterboxd.com/api/v0/"
     
+    /**
+     Checks if the user is logged in by checking if an access token exists.
+
+     - Return: A Boolean value indicating if the user is logged in.
+     */
+    public static var isLoggedIn:Bool {return tokenManager.accessToken != nil}
+    
+    /**
+     Configures the API keys for the application. Must be implemented before any requests are made.
+
+     - Parameters:
+       - apiKey: The application's API key.
+       - apiSecret: The application's API secret.
+     */
     public static func configure(apiKey:String, apiSecret:String) {
         Letterboxd.apiKey = apiKey
         Letterboxd.apiSecret = apiSecret
     }
+    
+    /**
+     Logs the user out by removing the existing access token.
+     */
+    public static func logout() { tokenManager.removeToken()}
 
 }
 

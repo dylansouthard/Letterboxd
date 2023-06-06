@@ -18,7 +18,26 @@ extension LBParams {
             return films.urlQueryItems + (member?.urlQueryItems ?? []) + (tag?.urlQueryItems ?? []) + URLQueryItem.array(fromParam:sortBy)
         }
         
-        enum SortRule: String, LBParamType {
+        // FilmCollection
+        /**
+         Retrieves a collection of films based on specified parameters.
+
+         - Parameter films: Filters to be applied on the retrieved films.
+         - Parameter member: Specifies the member and type of relationship.
+         - Parameter tag: Specifies the tag to filter the film collection.
+         - Parameter sortBy: Determines the sorting rule for the retrieved list.
+         */
+        public init(films: FilmParams = FilmParams(),
+                    member: FilmMemberRelationship? = nil,
+                    tag: Tag? = nil,
+                    sortBy: SortRule? = nil) {
+            self.films = films
+            self.member = member
+            self.tag = tag
+            self.sortBy = sortBy
+        }
+        
+        public enum SortRule: String, LBParamType {
             case filmName = "FilmName"
             case releaseDateLatestFirst = "ReleaseDateLatestFirst"
             case releaseDateEarliestFirst = "ReleaseDateEarliestFirst"
