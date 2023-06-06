@@ -127,7 +127,6 @@ Letterboxd.fetchFilms(
             ),
             region: LBParams.Region(...),
             releaseDate: LBParams.ReleaseDate(...),
-            service: .netflix,
             filters: [.released, .notInWatchlist]
         ),
         member: LBParams.FilmMemberRelationship(...),
