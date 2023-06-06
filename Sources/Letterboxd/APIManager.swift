@@ -225,7 +225,7 @@ extension Letterboxd {
         
         // If the request requires authentication, check the token
        
-            tokenManager.checkToken() { result in
+            tokenManager?.checkToken() { result in
               
                 switch result {
                 case .success(let token):

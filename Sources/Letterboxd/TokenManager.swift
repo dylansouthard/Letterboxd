@@ -10,18 +10,14 @@ import KeychainAccess
 
 // Class to manage tokens in Letterboxd
 class LetterboxdTokenManager {
-
-    // Singleton instance
-    static let shared = LetterboxdTokenManager()
     
    //MARK: - =============== VARIABLES ===============
     
     
     //MARK: - === UTILITY VARS ===
-    
     private let dateFormatter = DateFormatter(format: "yyyy-MM-dd'T'HH:mm:ssZ")
     private let urlString = Letterboxd.baseURL + "auth/token"
-    private let keychain = Keychain(service: "com.ihounokyaku.letterboxd")
+    private let keychain:Keychain
     
     //MARK: - === TOKEN VARS ===
     
@@ -64,7 +60,9 @@ class LetterboxdTokenManager {
     // Check if the token is valid
     private var tokenValid:Bool {!(accessToken == nil || tokenExpired)}
     
-    
+    init(service: String) {
+            keychain = Keychain(service: service)
+        }
     //MARK: - =============== FUNCTIONS ===============
     
     //MARK: - === GENERATE/REFRESH TOKEN ===

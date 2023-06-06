@@ -28,12 +28,12 @@ Here are some examples of how to use the Swift wrapper for various Letterboxd AP
 
 ### Authentication
 
-The module must be configured with your API key and API secret before use:
+The module must be configured with your API key, API secret, and your unique keychain service name (used to store and retrieve access token data) before use:
 ```swift
 import Letterboxd
 
-// Set up your API key and secret. This must be called before any requests are made.
-Letterboxd.configure(apiKey: "yourApiKey", apiSecret: "yourApiSecret")
+// Set up your API key, secret, and keychain service name. This must be called before any requests are made.
+Letterboxd.configure(apiKey: "yourApiKey", apiSecret: "yourApiSecret", keychainService: "yourKeychainServiceName")
 ```
 
 ### Authorization

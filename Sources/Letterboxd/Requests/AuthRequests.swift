@@ -36,7 +36,7 @@ extension Letterboxd {
             "password": password
         ]
         
-        tokenManager.fetchToken(bodyParams: bodyParams, onComplete: onComplete)
+        tokenManager?.fetchToken(bodyParams: bodyParams, onComplete: onComplete)
     }
     
     

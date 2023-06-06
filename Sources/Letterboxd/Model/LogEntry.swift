@@ -116,9 +116,4 @@ extension Letterboxd {
         case notSubscribed = "NotSubscribed"
         case unsubscribed = "Unsubscribed"
     }
-    
-    
-    
-    
-    
 }
