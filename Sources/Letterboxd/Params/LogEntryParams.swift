@@ -35,7 +35,53 @@ extension LBParams {
             return _items + _filmDate + _genreAndRegion + _theRest
         }
         
-        enum SortRule: String, Codable, LBParamType {
+        /**
+         Specifies parameters for fetching log entries.
+
+         - Parameter filters: Array of filter rules applied to the log entries.
+         - Parameter film: The unique identifier of the film in the log entries.
+         - Parameter member: The relationship of the log entry with a member.
+         - Parameter memberFilters: Array of filters applied to the log entry members.
+         - Parameter date: Parameters related to the date of the log entry.
+         - Parameter rating: Parameters related to the rating of the log entry.
+         - Parameter filmDate: Parameters related to the release date of the film in the log entry.
+         - Parameter genre: Parameters related to the genre of the film in the log entry.
+         - Parameter region: Parameters related to the region of the film in the log entry.
+         - Parameter tag: The tag associated with the log entry.
+         - Parameter service: The streaming service where the film is available.
+         - Parameter pagination: Parameters to control pagination.
+         - Parameter sortBy: Rule by which to sort the log entries.
+         */
+        public init(filters: [Filter] = [],
+                    film: String? = nil,
+                    member: LogEntryMemberRelationship? = nil,
+                    memberFilters: [Members.ResultsFilter] = [],
+                    date: DateParams? = nil,
+                    rating: Rating = Rating(),
+                    filmDate: ReleaseDate = ReleaseDate(),
+                    genre: Genre = Genre(),
+                    region: Region = Region(),
+                    tag: Tag? = nil,
+                    service: Letterboxd.FilmService? = nil,
+                    pagination: Pagination = Pagination(),
+                    sortBy: SortRule? = nil) {
+            self.filters = filters
+            self.film = film
+            self.member = member
+            self.memberFilters = memberFilters
+            self.date = date
+            self.rating = rating
+            self.filmDate = filmDate
+            self.genre = genre
+            self.region = region
+            self.tag = tag
+            self.service = service
+            self.pagination = pagination
+            self.sortBy = sortBy
+        }
+
+        
+        public enum SortRule: String, Codable, LBParamType {
             case whenAdded = "WhenAdded"
             case date = "Date"
             case diaryCount = "DiaryCount"
@@ -75,12 +121,12 @@ extension LBParams {
             
             static var paramName: String{"sort"}
             
-            init(from decoder: Decoder) throws {
+           public init(from decoder: Decoder) throws {
                 self = try SortRule(rawValue: decoder.singleValueContainer().decode(String.self)) ?? .whenAdded
             }
         }
         
-        enum Filter: String, LBParamType {
+        public enum Filter: String, LBParamType {
             case hasDiaryDate = "HasDiaryDate"
             case hasReview = "HasReview"
             case clean = "Clean"

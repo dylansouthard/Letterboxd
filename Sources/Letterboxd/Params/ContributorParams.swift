@@ -24,9 +24,23 @@ extension LBParams {
             return items  + cont + (tag?.urlQueryItems ?? []) + URLQueryItem.array(fromParam:sortBy)
         }
         
+        public init(pagination: Pagination = Pagination(),
+                    films: FilmParams = FilmParams(),
+                    member: FilmMemberRelationship? = nil,
+                    tag: Tag? = nil,
+                    sortBy: SortRule? = nil,
+                    contribution: Letterboxd.ContributionType? = nil) {
+            self.pagination = pagination
+            self.films = films
+            self.member = member
+            self.tag = tag
+            self.sortBy = sortBy
+            self.contribution = contribution
+        }
+        
         
         //MARK: - === ENUMS ===
-        enum SortRule:String, LBParamType {
+        public enum SortRule:String, LBParamType {
             case billing = "Billing"
             case filmName = "FilmName"
             case releaseDateLatestFirst = "ReleaseDateLatestFirst"

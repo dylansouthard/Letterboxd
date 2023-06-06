@@ -18,6 +18,7 @@ extension LBParams {
         var review:String?
         var pagination:Pagination = Pagination()
         var sortBy:SortRule?
+
         
         var urlQueryItems: [URLQueryItem] {
     
@@ -29,20 +30,44 @@ extension LBParams {
             return URLQueryItem.array(fromParam: sortBy) + m + l + r + p + f
         }
         
+        // Members struct
+        /**
+         Specifies parameters for fetching members.
+
+         - Parameter member: Relationship details about the member.
+         - Parameter film: Film related details of the member.
+         - Parameter list: List related details of the member.
+         - Parameter review: Unique identifier of the member's review.
+         - Parameter pagination: Parameters to control pagination.
+         - Parameter sortBy: Rule by which to sort the members.
+         */
+        public init(member: MemberRelationship? = nil,
+                    film: MemberFilmRelationship? = nil,
+                    list: MemberListRelationship? = nil,
+                    review: String? = nil,
+                    pagination: Pagination = Pagination(),
+                    sortBy: SortRule? = nil) {
+            self.member = member
+            self.film = film
+            self.list = list
+            self.review = review
+            self.pagination = pagination
+            self.sortBy = sortBy
+        }
         
-        enum ResultsFilter:String, Codable, LBParamType {
+       public enum ResultsFilter:String, Codable, LBParamType {
             case noDuplicateMembers = "NoDuplicateMembers"
             static var paramName:String {"filter"}
         }
         
-        enum IncludeFriendsType: String, Codable, LBParamType {
+        public enum IncludeFriendsType: String, Codable, LBParamType {
             case none = "None"
             case all = "All"
             case only = "Only"
             static var paramName: String {"includeFriends"}
         }
 
-        enum SortRule: String, Codable, LBParamType {
+        public enum SortRule: String, Codable, LBParamType {
             case date = "Date"
             case name = "Name"
             case popularity = "MemberPopularity"
@@ -69,8 +94,26 @@ extension LBParams {
             return include.map{$0.asURLQueryItem} + filters.map{$0.asURLQueryItem} + URLQueryItem.array(fromBool: adult, named: "adult") + pagination.urlQueryItems
         }
         
+        // Activity struct
+        /**
+         Specifies parameters for fetching activities.
+
+         - Parameter include: Array of types of activities to include.
+         - Parameter filters: Array of filters to apply to the activities.
+         - Parameter adult: Whether to include adult content.
+         - Parameter pagination: Parameters to control pagination.
+         */
+        public init(include: [ActivityType] = [],
+                    filters: [Filter] = [],
+                    adult: Bool? = nil,
+                    pagination: Pagination = Pagination()) {
+            self.include = include
+            self.filters = filters
+            self.adult = adult
+            self.pagination = pagination
+        }
         
-        enum ActivityType:String, Codable, LBParamType {
+        public enum ActivityType:String, Codable, LBParamType {
             
             case reviewActivity = "ReviewActivity"
             case reviewCommentActivity = "ReviewCommentActivity"
@@ -92,7 +135,7 @@ extension LBParams {
             
         }
         
-        enum Filter:String, Codable, LBParamType {
+        public enum Filter:String, Codable, LBParamType {
             
             case ownActivity = "OwnActivity"
             case notOwnActivity = "NotOwnActivity"
@@ -114,7 +157,29 @@ extension LBParams {
             return films.urlQueryItems + (member?.urlQueryItems ?? []) + (tag?.urlQueryItems ?? []) + pagination.urlQueryItems + URLQueryItem.array(fromParam: sortBy)
         }
         
-        enum SortRule: String, LBParamType {
+        // Watchlist struct
+        /**
+         Specifies parameters for fetching a watchlist.
+
+         - Parameter films: Parameters related to the films in the watchlist.
+         - Parameter member: Relationship details of the member associated with the film in the watchlist.
+         - Parameter tag: Tag associated with the watchlist.
+         - Parameter pagination: Parameters to control pagination.
+         - Parameter sortBy: Rule by which to sort the films in the watchlist.
+         */
+        public init(films: FilmParams = FilmParams(),
+                    member: FilmMemberRelationship? = nil,
+                    tag: Tag? = nil,
+                    pagination: Pagination = Pagination(),
+                    sortBy: SortRule? = nil) {
+            self.films = films
+            self.member = member
+            self.tag = tag
+            self.pagination = pagination
+            self.sortBy = sortBy
+        }
+        
+        public enum SortRule: String, LBParamType {
             case added = "Added"
             case dateLatestFirst = "DateLatestFirst"
             case dateEarliestFirst = "DateEarliestFirst"

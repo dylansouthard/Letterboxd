@@ -19,7 +19,29 @@ extension LBParams {
             return films.urlQueryItems + (member?.urlQueryItems ?? []) + (tag?.urlQueryItems ?? []) + pagination.urlQueryItems + URLQueryItem.array(fromParam:sortBy)
         }
         
-        enum SortRule: String, Codable, LBParamType {
+        // Films
+        /**
+         Retrieves films based on specified criteria.
+
+         - Parameter films: Specifies criteria for the films to retrieve.
+         - Parameter member: Defines the relationship with a member. Can be used to retrieve films connected to a particular member.
+         - Parameter tag: Specifies a tag. Retrieves films that are tagged with this.
+         - Parameter pagination: Pagination settings for the retrieved list.
+         - Parameter sortBy: Determines the sorting rule for the retrieved list.
+         */
+        public init(films: FilmParams = FilmParams(),
+                    member: FilmMemberRelationship? = nil,
+                    tag: Tag? = nil,
+                    pagination: Pagination = Pagination(),
+                    sortBy: SortRule? = nil) {
+            self.films = films
+            self.member = member
+            self.tag = tag
+            self.pagination = pagination
+            self.sortBy = sortBy
+        }
+        
+        public enum SortRule: String, Codable, LBParamType {
             
             case filmName = "FilmName"
             case dateLatestFirst = "DateLatestFirst"
@@ -63,6 +85,22 @@ extension LBParams {
         var urlQueryItems: [URLQueryItem] {
             return (member?.urlQueryItems ?? []) + pagination.urlQueryItems + URLQueryItem.array(fromParam: sortBy)
         }
+        
+        // FilmRelatedMembers
+        /**
+         Retrieves members related to a specific film.
+
+         - Parameter member: Specifies the member and type of relationship.
+         - Parameter pagination: Pagination settings for the retrieved list.
+         - Parameter sortBy: Determines the sorting rule for the retrieved list.
+         */
+        public init(member: MemberRelationship? = nil,
+                    pagination: Pagination = Pagination(),
+                    sortBy: Members.SortRule? = nil) {
+            self.member = member
+            self.pagination = pagination
+            self.sortBy = sortBy
+        }
     }
     
     //MARK: - =============== SHARED FILMS PARAMS ===============
@@ -79,7 +117,32 @@ extension LBParams {
             return filmIDs.map{$0.asURLQueryItem} + genre.urlQueryItems + region.urlQueryItems + releaseDate.urlQueryItems + (service.map{[$0.asURLQueryItem]} ?? []) + filters.map{$0.asURLQueryItem}
         }
         
-        enum Filter: String, Codable, LBParamType {
+        // FilmParams
+        /**
+         Specifies criteria for filtering and searching for films.
+
+         - Parameter filmIDs: List of film IDs to search for.
+         - Parameter genre: Genre parameters for the films to search for.
+         - Parameter region: Region parameters for the films to search for.
+         - Parameter releaseDate: Release date parameters for the films to search for.
+         - Parameter service: The film service to use for searching films.
+         - Parameter filters: Additional filters to apply when searching for films.
+         */
+        public init(filmIDs: [FilmID] = [],
+                    genre: Genre = Genre(),
+                    region: Region = Region(),
+                    releaseDate: ReleaseDate = ReleaseDate(),
+                    service: Letterboxd.FilmService? = nil,
+                    filters: [Filter] = []) {
+            self.filmIDs = filmIDs
+            self.genre = genre
+            self.region = region
+            self.releaseDate = releaseDate
+            self.service = service
+            self.filters = filters
+        }
+        
+        public enum Filter: String, Codable, LBParamType {
             case released = "Released"
             case notReleased = "NotReleased"
             case inWatchlist = "InWatchlist"
@@ -116,13 +179,13 @@ extension LBParams {
         let id:String
         let externalType:ExternalFilmIDType?
         
-        enum ExternalFilmIDType:String {
+        public enum ExternalFilmIDType:String {
             case tmdb
             case imdb
             
         }
         
-        init(_ id:String, externalType:ExternalFilmIDType? = nil) {
+        public init(_ id:String, externalType:ExternalFilmIDType? = nil) {
             self.id = id
             self.externalType = externalType
         }
@@ -146,6 +209,22 @@ extension LBParams {
             let excluded = excludeGenres.map { URLQueryItem(name: "excludeGenre", value: $0.rawValue) }
             return (genre.map { [URLQueryItem(name: "genre", value: $0.rawValue)] } ?? []) + included + excluded
         }
+        
+        // Genre
+        /**
+         Specifies the genre parameters for filtering films.
+
+         - Parameter genre: Specifies a single genre to filter by.
+         - Parameter includeGenres: List of genres to include in the results.
+         - Parameter excludeGenres: List of genres to exclude from the results.
+        */
+        public init(genre: Letterboxd.GenreType? = nil,
+                    includeGenres: [Letterboxd.GenreType] = [],
+                    excludeGenres: [Letterboxd.GenreType] = []) {
+            self.genre = genre
+            self.includeGenres = includeGenres
+            self.excludeGenres = excludeGenres
+        }
     }
 
     //MARK: - === REGION PARAMS ===
@@ -156,6 +235,18 @@ extension LBParams {
         var urlQueryItems: [URLQueryItem] {
             return (country.map { [URLQueryItem(name: "country", value: $0)] } ?? []) + (language.map { [URLQueryItem(name: "language", value: $0)] } ?? [])
         }
+        
+        // Region
+        /**
+         Specifies the region parameters for filtering films.
+
+         - Parameter country: The country of the film.
+         - Parameter language: The language of the film.
+         */
+        public init(country: String? = nil, language: String? = nil) {
+            self.country = country
+            self.language = language
+        }
     }
 
     //MARK: - === RELEASE DATE PARAMS ===
@@ -165,6 +256,18 @@ extension LBParams {
         
         var urlQueryItems: [URLQueryItem] {
             return urlQueryItemsNamed(decade: "decade", year: "year")
+        }
+        
+        // ReleaseDate
+        /**
+         Specifies the release date parameters for filtering films.
+
+         - Parameter decade: The decade when the film was released.
+         - Parameter year: The specific year when the film was released.
+         */
+        public init(decade: Int? = nil, year: Int? = nil) {
+            self.decade = decade
+            self.year = year
         }
         
         func urlQueryItemsNamed(decade:String, year:String) -> [URLQueryItem] {

@@ -27,8 +27,42 @@ extension LBParams {
             return _items + memTags + memberFilters.map{$0.asURLQueryItem} + filmsOfNote.map{URLQueryItem(name: "filmsOfNote", value: $0)} + pagination.urlQueryItems + URLQueryItem.array(fromParam:sortBy)
         }
         
+        // Lists
+        /**
+         Specifies parameters for fetching lists.
+
+         - Parameter filters: Array of filter rules applied to the lists.
+         - Parameter film: The unique identifier of a film.
+         - Parameter clonedFrom: The unique identifier of a list from which the list was cloned.
+         - Parameter tag: The tag associated with the list.
+         - Parameter member: The relationship of the list with a member.
+         - Parameter memberFilters: Array of filters applied to the list members.
+         - Parameter filmsOfNote: Array of identifiers of notable films.
+         - Parameter pagination: Parameters to control pagination.
+         - Parameter sortBy: Rule by which to sort the lists.
+         */
+        public init(filters: [Filter] = [],
+                    film: String? = nil,
+                    clonedFrom: String? = nil,
+                    tag: Tag? = nil,
+                    member: ListMemberRelationship? = nil,
+                    memberFilters: [Members.ResultsFilter] = [],
+                    filmsOfNote: [String] = [],
+                    pagination: Pagination = Pagination(),
+                    sortBy: SortRule? = nil) {
+            self.filters = filters
+            self.film = film
+            self.clonedFrom = clonedFrom
+            self.tag = tag
+            self.member = member
+            self.memberFilters = memberFilters
+            self.filmsOfNote = filmsOfNote
+            self.pagination = pagination
+            self.sortBy = sortBy
+        }
         
-        enum Filter: String, Codable, LBParamType {
+        
+        public enum Filter: String, Codable, LBParamType {
             case clean = "Clean"
             case published = "Published"
             case notPublished = "NotPublished"
@@ -40,7 +74,7 @@ extension LBParams {
         }
         
         
-        enum SortRule: String, Codable, LBParamType {
+        public enum SortRule: String, Codable, LBParamType {
             case date = "Date"
             case whenLiked = "WhenLiked"
             case whenPublishedLatestFirst = "WhenPublishedLatestFirst"
@@ -75,7 +109,29 @@ extension LBParams {
             return films.urlQueryItems + (member?.urlQueryItems ?? []) + (tag?.urlQueryItems ?? []) + pagination.urlQueryItems + URLQueryItem.array(fromParam:sortBy)
         }
         
-        enum SortRule: String, Codable, LBParamType {
+        // ListEntries
+        /**
+         Specifies parameters for fetching entries from a list.
+
+         - Parameter films: Parameters related to films to be included in the results.
+         - Parameter member: The relationship of the entry with a member.
+         - Parameter tag: The tag associated with the entry.
+         - Parameter pagination: Parameters to control pagination.
+         - Parameter sortBy: Rule by which to sort the list entries.
+         */
+        public init(films: FilmParams = FilmParams(),
+                    member: FilmMemberRelationship? = nil,
+                    tag: Tag? = nil,
+                    pagination: Pagination = Pagination(),
+                    sortBy: SortRule? = nil) {
+            self.films = films
+            self.member = member
+            self.tag = tag
+            self.pagination = pagination
+            self.sortBy = sortBy
+        }
+        
+        public enum SortRule: String, Codable, LBParamType {
             case listRanking = "ListRanking"
             case whenAddedToList = "WhenAddedToList"
             case whenAddedToListEarliestFirst = "WhenAddedToListEarliestFirst"

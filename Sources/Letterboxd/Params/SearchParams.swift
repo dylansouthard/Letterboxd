@@ -20,7 +20,24 @@ extension LBParams {
             return i.asURLQueryItems + URLQueryItem.array(fromParam: contributionType) + URLQueryItem.array(fromParam: searchMethod) + URLQueryItem.array(fromBool: adult, named: "adult") + pagination.urlQueryItems
         }
         
-        enum SearchMethod: String, Codable, LBParamType {
+        /**
+        Represents the search criteria for a Letterboxd search request.
+
+        - Parameter include: Specifies the types of items to include in the search results. Defaults to an empty array.
+        - Parameter contributionType: Specifies the type of contributions to include in the search results.
+        - Parameter searchMethod: Specifies the method to use when conducting the search.
+        - Parameter adult: Specifies whether to include adult content in the search results. Defaults to false.
+        - Parameter pagination: Specifies the pagination rules for the search results. Defaults to an instance of Pagination with default values.
+        */
+        public init(include: [SearchItemType] = [], contributionType: Letterboxd.ContributionType? = nil, searchMethod: SearchMethod? = nil, adult: Bool? = nil, pagination: Pagination = Pagination()) {
+            self.include = include
+            self.contributionType = contributionType
+            self.searchMethod = searchMethod
+            self.adult = adult
+            self.pagination = pagination
+        }
+        
+       public enum SearchMethod: String, Codable, LBParamType {
             case fullText = "FullText"
             case autocomplete = "Autocomplete"
             case namesAndKeywords = "NamesAndKeywords"
@@ -28,7 +45,7 @@ extension LBParams {
             static var paramName:String {"searchMethod"}
         }
         
-        enum SearchItemType: String, Codable, LBParamType {
+      public enum SearchItemType: String, Codable, LBParamType {
             case contributor = "ContributorSearchItem"
             case film = "FilmSearchItem"
             case list = "ListSearchItem"
