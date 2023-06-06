@@ -10,26 +10,26 @@ import Foundation
 extension Letterboxd {
     
     public struct List:Codable {
-        let id: String
-        let name: String
-        let version: Int
-        let filmCount: Int
-        let published: Bool
-        let ranked: Bool
-        let hasEntriesWithNotes:Bool
-        let descriptionLbml: String?
-        let tags:[Tag]
+        public let id: String
+        public let name: String
+        public let version: Int
+        public let filmCount: Int
+        public let published: Bool
+        public let ranked: Bool
+        public let hasEntriesWithNotes:Bool
+        public let descriptionLbml: String?
+        public let tags:[Tag]
         private let _whenCreated:String
         private let _whenPublished:String?
-        let commentPolicy:CommentPolicy?
-        let sharePolicy: SharePolicy
-        let owner: MemberSummary
-        let clonedFrom: ListIdentifier?
-        let previewEntries: [ListEntrySummary]
-        let links:[Link]
-        let backdrop:[Image]?
-        let backdropFocalPoint:Double?
-        let description: String?
+        public let commentPolicy:CommentPolicy?
+        public let sharePolicy: SharePolicy
+        public let owner: MemberSummary
+        public let clonedFrom: ListIdentifier?
+        public let previewEntries: [ListEntrySummary]
+        public let links:[Link]
+        public let backdrop:[Image]?
+        public let backdropFocalPoint:Double?
+        public let description: String?
         
         enum CodingKeys: String, CodingKey {
             case id, name, version, filmCount, published, ranked

@@ -52,8 +52,8 @@ extension Letterboxd {
     }
     
     public struct ReviewCommentsResponse: Codable {
-        let next:String?
-        let items:[ReviewComment]
+        public let next:String?
+        public let items:[ReviewComment]
     }
     
     public struct ReviewComment: Codable {

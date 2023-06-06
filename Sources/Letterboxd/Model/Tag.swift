@@ -9,8 +9,6 @@ import Foundation
 
 extension Letterboxd {
 
-
-    
     public struct Tag: Codable {
         public let code: String
         public let displayTag: String
