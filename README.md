@@ -1,6 +1,6 @@
 # Letterboxd
 
-This is a Swift wrapper for the [Letterboxd API](https://api-docs.letterboxd.com/). It provides a convenient way to integrate your Swift applications with Letterboxd's services, offering functions for common API endpoints.
+This is an unofficial Swift wrapper for the [Letterboxd API](https://api-docs.letterboxd.com/). It provides a convenient way to integrate your Swift applications with Letterboxd's services, offering functions for common API endpoints.
 
 ## Table of Contents
 1. [Installation](#installation)
